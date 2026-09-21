@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forge Fitness | Gym, classes and personal training</title>
+<meta name="description" content="Forge Fitness is a neighbourhood gym with strength training, HIIT, yoga and personal coaching. See the timetable and join on WhatsApp. Demo website by PS Digital Studios.">
+<meta name="theme-color" content="#101114">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101114'/%3E%3Cpath d='M18 50V14h28v9H28v6h14v9H28v12z' fill='%232f4bff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --chalk:#f1efe8; --iron:#101114; --blue:#2f4bff; --blue-d:#1f36d6; --steel:#585d69; --line:#d6d3c8; --sky:#e0e5ff; --white:#fff;
+  --display:'Barlow Condensed','Arial Narrow','Helvetica Neue Condensed',Impact,sans-serif;
+  --body:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);font-size:1.0625rem;line-height:1.6;color:var(--iron);background:var(--chalk);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.i{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+section[id]{scroll-margin-top:80px}
+
+.demo-bar{background:#000;color:#c9cbd2;font-size:.86rem;text-align:center;padding:8px 16px}
+.demo-bar a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.demo-bar .gap{display:inline-block;width:14px}
+
+.site-header{position:sticky;top:0;z-index:40;background:var(--chalk);border-bottom:3px solid var(--iron)}
+.bar{display:flex;align-items:center;gap:30px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.9rem;letter-spacing:.02em;text-transform:uppercase}
+.logo-mark{display:grid;place-items:center;width:38px;height:38px;background:var(--iron);color:var(--blue)}
+.logo-mark svg{width:24px;height:24px;fill:currentColor}
+.nav{display:flex;gap:28px;margin-left:auto;font-weight:600}
+.nav a{padding:6px 0;border-bottom:3px solid transparent}
+.nav a:hover{border-color:var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 30px;border:0;background:var(--blue);color:#fff;font:700 1.05rem var(--body);cursor:pointer;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));transition:background .2s}
+.btn:hover{background:var(--blue-d)}
+.btn-dark{background:var(--iron)}
+.btn-dark:hover{background:#2a2c33}
+.btn-sm{padding:11px 22px;font-size:.98rem}
+.menu-btn{display:none;background:none;border:0;padding:8px;color:var(--iron);cursor:pointer}
+
+/* hero */
+.hero{border-bottom:3px solid var(--iron)}
+.hero-grid>*{min-width:0}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:0;align-items:stretch}
+.hero-copy{padding:64px 48px 64px 0}
+.hero h1{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(3.3rem,8vw,7.4rem);line-height:.88;letter-spacing:-.005em}
+.hero .lead{margin:28px 0 34px;max-width:28em;font-size:1.2rem;color:var(--steel)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+.hours{margin-top:34px;display:grid;gap:2px;font-weight:600}
+.hours span{color:var(--steel);font-weight:500}
+.today{background:var(--iron);color:#fff;padding:40px 36px;border-left:3px solid var(--iron);display:flex;flex-direction:column}
+.today h2{font-family:var(--display);font-weight:700;font-size:2.3rem;text-transform:uppercase;line-height:1}
+.today h2 small{display:block;font-size:1.05rem;font-weight:600;color:#9aa4ff;letter-spacing:.02em;margin-bottom:6px;text-transform:none;font-family:var(--body)}
+.today ul{margin:26px 0 0}
+.today li{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:16px 0;border-top:1px solid #33363f}
+.today li b{font-family:var(--display);font-size:1.5rem;font-weight:700;color:#9aa4ff;line-height:1.1;white-space:nowrap}
+.today li span{display:block;color:#aeb2bc;font-size:.92rem}
+.today .btn{margin-top:auto;align-self:flex-start}
+.today ul+.btn{margin-top:28px}
+
+/* sections */
+.section{padding:84px 0;border-bottom:3px solid var(--iron)}
+h2.title{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(2.6rem,6vw,4.4rem);line-height:.95}
+.section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:44px}
+.section-head p{max-width:28em;color:var(--steel)}
+
+.programs{display:grid;grid-template-columns:repeat(2,1fr);border:3px solid var(--iron);background:var(--white)}
+.program{padding:34px 32px;display:grid;grid-template-columns:auto 1fr;gap:22px}
+.program:nth-child(odd){border-right:3px solid var(--iron)}
+.program:nth-child(-n+2){border-bottom:3px solid var(--iron)}
+.program .ico{display:grid;place-items:center;width:64px;height:64px;background:var(--blue);color:#fff}
+.program h3{font-family:var(--display);font-weight:700;font-size:1.9rem;text-transform:uppercase;line-height:1.05;margin-bottom:8px}
+.program p{color:var(--steel)}
+.program small{display:block;margin-top:12px;font-weight:700;font-size:.95rem}
+
+/* timetable */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.tab{border:3px solid var(--iron);background:transparent;padding:10px 20px;font:700 1rem var(--body);cursor:pointer;color:var(--iron)}
+.tab:hover{background:var(--sky)}
+.tab[aria-pressed="true"]{background:var(--iron);color:#fff}
+.sched{border:3px solid var(--iron);background:var(--white)}
+.sched li{display:grid;grid-template-columns:150px 1fr auto;gap:20px;align-items:center;padding:20px 28px;border-top:3px solid var(--iron)}
+.sched li:first-child{border-top:0}
+.sched b{font-family:var(--display);font-weight:700;font-size:1.8rem;line-height:1}
+.sched .cls{font-weight:700;font-size:1.15rem}
+.sched .lvl{background:var(--sky);padding:4px 12px;font-weight:600;font-size:.9rem}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:3px solid var(--iron);background:var(--white)}
+.plan{padding:36px 32px;display:flex;flex-direction:column;gap:6px}
+.plan+.plan{border-left:3px solid var(--iron)}
+.plan h3{font-family:var(--display);font-weight:700;font-size:2rem;text-transform:uppercase}
+.plan .amt{font-family:var(--display);font-weight:800;font-size:4rem;line-height:1;margin-top:8px}
+.plan .per{color:var(--steel);font-weight:500}
+.plan .save{display:inline-block;align-self:flex-start;margin-top:12px;background:var(--iron);color:#fff;padding:3px 12px;font-weight:600;font-size:.92rem}
+.plan .btn{margin-top:26px;align-self:flex-start}
+.plan.best{background:var(--blue);color:#fff}
+.plan.best .per{color:#dfe5ff}
+.plan.best .save{background:#fff;color:var(--iron)}
+.plan.best .btn{background:var(--iron)}
+.incl{display:flex;flex-wrap:wrap;gap:12px 34px;margin-top:28px;font-weight:600}
+.incl li{display:flex;align-items:center;gap:10px}
+.incl .i{width:22px;height:22px;color:var(--blue);stroke-width:2.6}
+.note{color:var(--steel);font-size:.92rem;margin-top:16px}
+
+/* bmi */
+.dark{background:var(--iron);color:#fff}
+.dark h2.title{color:#fff}
+.bmi-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.bmi-grid p.lead{color:#b4b8c2;margin-top:18px;max-width:26em}
+.calc{background:var(--chalk);color:var(--iron);padding:34px;border:3px solid #fff}
+.calc .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px;margin-bottom:16px}
+label{font-weight:700;font-size:.95rem}
+input,select{width:100%;padding:13px 14px;border:3px solid var(--iron);border-radius:0;font:inherit;background:#fff;color:var(--iron)}
+input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--sky)}
+.result{margin-top:22px;padding-top:22px;border-top:3px solid var(--iron)}
+.result .num{font-family:var(--display);font-weight:800;font-size:3.6rem;line-height:1}
+.result .cat{font-weight:700;font-size:1.15rem;margin-left:8px}
+.scale{position:relative;height:16px;margin:18px 0 6px;display:grid;grid-template-columns:18.5fr 6.4fr 5fr 5fr;border:2px solid var(--iron)}
+.scale i:nth-child(1){background:#b9c4ff}.scale i:nth-child(2){background:var(--blue)}.scale i:nth-child(3){background:#ffb84d}.scale i:nth-child(4){background:#ff6b57}
+.pin{position:absolute;top:-10px;width:4px;height:34px;background:var(--iron);transform:translateX(-2px)}
+.scale-labels{display:flex;justify-content:space-between;font-size:.82rem;color:var(--steel)}
+.small{font-size:.88rem;color:var(--steel);margin-top:14px}
+
+/* join */
+.join-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.join-grid p.lead{color:var(--steel);margin:18px 0 26px;max-width:26em}
+.info{display:grid;gap:14px;font-weight:600}
+.info li{display:flex;gap:12px;align-items:flex-start}
+.info .i{width:24px;height:24px;color:var(--blue);margin-top:2px}
+.info span{display:block;font-weight:500;color:var(--steel)}
+.form{background:var(--white);border:3px solid var(--iron);padding:34px}
+.form h3{font-family:var(--display);font-weight:700;font-size:2rem;text-transform:uppercase;margin-bottom:20px}
+.form .btn{width:100%;margin-top:6px}
+.fine{font-size:.85rem;color:var(--steel);text-align:center;margin-top:14px}
+
+.site-footer{background:var(--iron);color:#b4b8c2;padding:44px 0 30px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:22px}
+.foot .logo{color:#fff}
+.foot nav{display:flex;flex-wrap:wrap;gap:22px}
+.foot a:hover{color:#fff}
+.legal{border-top:1px solid #33363f;margin-top:26px;padding-top:20px;font-size:.88rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.legal a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.wa-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#25d366;color:#05260f;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.wa-fab .i{width:30px;height:30px}
+
+@media (max-width:1000px){
+  .hero-grid,.bmi-grid,.join-grid{grid-template-columns:1fr;gap:0}
+  .hero-copy{padding:48px 0}
+  .today{border-left:0;border-top:3px solid var(--iron);margin:0 -20px;padding:36px 20px}
+  .bmi-grid,.join-grid{gap:40px}
+  .plans{grid-template-columns:1fr}
+  .plan+.plan{border-left:0;border-top:3px solid var(--iron)}
+}
+@media (max-width:860px){
+  .menu-btn{display:block;margin-left:auto}
+  .bar>.btn{display:none}
+  .nav{display:none;position:absolute;left:0;right:0;top:70px;flex-direction:column;gap:0;background:var(--chalk);border-bottom:3px solid var(--iron);padding:6px 20px 16px;margin:0}
+  .nav.open{display:flex}
+  .nav a{padding:14px 0;border-bottom:1px solid var(--line)}
+  .programs{grid-template-columns:1fr}
+  .program:nth-child(odd){border-right:0}
+  .program:not(:last-child){border-bottom:3px solid var(--iron)}
+}
+@media (max-width:560px){
+  .section{padding:60px 0}
+  .sched li{grid-template-columns:1fr auto;gap:4px 12px;padding:16px 18px}
+  .sched b{grid-column:1/-1}
+  .program{padding:26px 22px;grid-template-columns:1fr}
+  .calc,.form{padding:24px 20px}
+  .calc .row{grid-template-columns:1fr}
+  .today li{grid-template-columns:96px 1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2s5 4.5 5 9.5a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8.5z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-lotus" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 8v5M7 16l5-3 5 3M5 21h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M3 21l1.65-4.9A8.5 8.5 0 1 1 8 19.4L3 21z"/><path d="M9 8.5c0 3.3 2.7 6 6 6l1.2-1.3-2-1-.9.7c-.9-.4-1.6-1.1-2-2l.7-.9-1-2L9 8.5z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<div class="demo-bar">
+  Demo website designed by <a href="https://1pun2.github.io/psdigitalstudios/">PS Digital Studios</a>
+  <span class="gap"></span><a href="https://1pun2.github.io/psdigitalstudios/contact.html">Get a website like this</a>
+</div>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Forge Fitness home"><span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V3h13v4.5h-8V11h7v4.5h-7V21z"/></svg></span>Forge</a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#programs">Programs</a>
+      <a href="#timetable">Timetable</a>
+      <a href="#membership">Membership</a>
+      <a href="#bmi">BMI check</a>
+      <a href="#join">Join</a>
+    </nav>
+    <a class="btn btn-sm" href="#join">Join now</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg class="i"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>Stronger every day.</h1>
+      <p class="lead">A neighbourhood gym with coaches on the floor, classes for every level and no pressure to be anyone but yourself. Come for a free trial session and see how it feels.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#join">Book a free trial</a>
+        <a class="btn btn-dark" href="#timetable">See the timetable</a>
+      </div>
+      <dl class="hours">
+        <div><dt style="display:inline;font-weight:700">Monday to Saturday:</dt> <dd style="display:inline;margin:0" class="hours-val">6 AM to 10 PM</dd></div>
+        <div><dt style="display:inline;font-weight:700">Sunday:</dt> <dd style="display:inline;margin:0" class="hours-val">7 AM to 1 PM</dd></div>
+      </dl>
+    </div>
+    <aside class="today" aria-labelledby="today-title">
+      <h2 id="today-title"><small>Classes on</small><span id="todayName">today</span></h2>
+      <ul id="todayList"></ul>
+      <a class="btn btn-sm" href="#timetable">Full week</a>
+    </aside>
+  </div>
+</section>
+
+<section class="section" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="title">Pick your training</h2>
+      <p>Four ways to train under one roof. Start with what feels right and change it up any time.</p>
+    </div>
+    <div class="programs">
+      <article class="program"><span class="ico"><svg class="i"><use href="#i-dumbbell"/></svg></span><div><h3>Strength training</h3><p>Free weights, machines and guided sessions to build strength safely and steadily.</p><small>Good for: building muscle and confidence</small></div></article>
+      <article class="program"><span class="ico"><svg class="i"><use href="#i-flame"/></svg></span><div><h3>Cardio and HIIT</h3><p>Short, high-energy classes that get your heart rate up and finish before you run out of steam.</p><small>Good for: fitness and fat loss</small></div></article>
+      <article class="program"><span class="ico"><svg class="i"><use href="#i-user"/></svg></span><div><h3>Personal training</h3><p>One-to-one coaching with a plan built around your goal, your schedule and your body.</p><small>Good for: a clear plan and accountability</small></div></article>
+      <article class="program"><span class="ico"><svg class="i"><use href="#i-lotus"/></svg></span><div><h3>Yoga and mobility</h3><p>Gentle sessions to stretch out, move better and recover between harder training days.</p><small>Good for: flexibility and recovery</small></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="timetable" style="background:var(--white)">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="title">Weekly timetable</h2>
+      <p>Pick a day to see what is on. All classes are led by a coach, and beginners are welcome.</p>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <ul class="sched" id="sched" aria-live="polite"></ul>
+    <p class="note">Class times shown are samples for this demo.</p>
+  </div>
+</section>
+
+<section class="section" id="membership">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="title">Membership plans</h2>
+      <p>Pay monthly, or commit for longer and save. Every plan includes the full gym floor and all classes.</p>
+    </div>
+    <div class="plans">
+      <article class="plan"><h3>Monthly</h3><p class="amt">₹1,500</p><p class="per">per month</p><a class="btn btn-dark btn-sm" href="#join" data-plan="Monthly">Choose monthly</a></article>
+      <article class="plan best"><h3>Quarterly</h3><p class="amt">₹4,000</p><p class="per">for 3 months</p><span class="save">Save ₹500</span><a class="btn btn-sm" href="#join" data-plan="Quarterly">Choose quarterly</a></article>
+      <article class="plan"><h3>Yearly</h3><p class="amt">₹12,000</p><p class="per">for 12 months</p><span class="save">Save ₹6,000</span><a class="btn btn-dark btn-sm" href="#join" data-plan="Yearly">Choose yearly</a></article>
+    </div>
+    <ul class="incl">
+      <li><svg class="i"><use href="#i-check"/></svg>Full gym floor access</li>
+      <li><svg class="i"><use href="#i-check"/></svg>All group classes</li>
+      <li><svg class="i"><use href="#i-check"/></svg>Coach support on the floor</li>
+      <li><svg class="i"><use href="#i-check"/></svg>Free trial session</li>
+    </ul>
+    <p class="note">Prices shown are samples for this demo.</p>
+  </div>
+</section>
+
+<section class="section dark" id="bmi">
+  <div class="wrap bmi-grid">
+    <div>
+      <h2 class="title">Check your BMI</h2>
+      <p class="lead">A quick number to start the conversation. Enter your height and weight to see where you stand, then ask a coach how to plan your first month.</p>
+    </div>
+    <form class="calc" id="bmiForm" novalidate>
+      <div class="row">
+        <div class="field"><label for="h">Height (cm)</label><input id="h" type="number" inputmode="decimal" min="100" max="250" placeholder="170" required></div>
+        <div class="field"><label for="w">Weight (kg)</label><input id="w" type="number" inputmode="decimal" min="25" max="300" placeholder="68" required></div>
+      </div>
+      <button class="btn" type="submit" style="width:100%">Calculate BMI</button>
+      <div class="result" id="bmiResult" aria-live="polite" hidden>
+        <p><span class="num" id="bmiNum"></span><span class="cat" id="bmiCat"></span></p>
+        <div class="scale" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="pin" id="bmiPin"></span></div>
+        <div class="scale-labels" aria-hidden="true"><span>15</span><span>18.5</span><span>25</span><span>30</span><span>35</span></div>
+      </div>
+      <p class="small" id="bmiError" role="alert"></p>
+      <p class="small">BMI is a general guide only and not a medical diagnosis. It does not account for muscle, age or body type.</p>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="join" style="border-bottom:0">
+  <div class="wrap join-grid">
+    <div>
+      <h2 class="title">Book a free trial</h2>
+      <p class="lead">Tell us your goal and we will set up a trial session with a coach. The form opens WhatsApp with your details ready to send.</p>
+      <ul class="info">
+        <li><svg class="i"><use href="#i-clock"/></svg><div>Open daily<span>Mon to Sat 6 AM to 10 PM, Sun 7 AM to 1 PM</span></div></li>
+        <li><svg class="i"><use href="#i-pin"/></svg><div>Forge Fitness<span>12 Sample Street, Your City</span></div></li>
+        <li><svg class="i"><use href="#i-phone"/></svg><div>Call or WhatsApp<span>+91 93050 12250</span></div></li>
+      </ul>
+    </div>
+    <form class="form" data-wa>
+      <h3>Join Forge</h3>
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="Name" required autocomplete="name"></div>
+      <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" name="Phone" type="tel" required autocomplete="tel"></div>
+      <div class="field"><label for="f-goal">Your main goal</label>
+        <select id="f-goal" name="Goal" required><option value="">Choose a goal</option><option>Build muscle and strength</option><option>Lose weight</option><option>Improve fitness</option><option>Learn the basics</option><option>Flexibility and recovery</option></select>
+      </div>
+      <div class="field"><label for="f-plan">Plan you are interested in</label>
+        <select id="f-plan" name="Plan"><option value="">Not sure yet</option><option>Monthly</option><option>Quarterly</option><option>Yearly</option><option>Personal training</option></select>
+      </div>
+      <button class="btn" type="submit"><svg class="i" style="width:22px;height:22px"><use href="#i-wa"/></svg>Send on WhatsApp</button>
+      <p class="fine">Demo form: messages go to PS Digital Studios.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V3h13v4.5h-8V11h7v4.5h-7V21z"/></svg></span>Forge</a>
+      <nav aria-label="Footer"><a href="#programs">Programs</a><a href="#timetable">Timetable</a><a href="#membership">Membership</a><a href="#join">Join</a></nav>
+    </div>
+    <div class="legal"><span>© <span data-year>2026</span> Forge Fitness. Sample business for demonstration.</span><span>Website by <a href="https://1pun2.github.io/psdigitalstudios/">PS Digital Studios</a></span></div>
+  </div>
+</footer>
+
+<a class="wa-fab" href="https://wa.me/919305012250?text=Hi%2C%20I%20saw%20the%20Forge%20Fitness%20demo%20website." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg class="i"><use href="#i-wa"/></svg></a>
+
+<script>
+(function () {
+  var WA = '919305012250', NAME = 'Forge Fitness';   // in a real client site, WA is the business's own number
+  var nav = document.getElementById('nav'), btn = document.getElementById('menuBtn');
+  btn.addEventListener('click', function () { var o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+  nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  /* Timetable (edit these lines for a real gym) */
+  var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var FULL = { Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' };
+  var WEEKDAY = [['6:30 AM', 'Strength basics', 'Beginner'], ['8:00 AM', 'HIIT cardio', 'All levels'], ['6:00 PM', 'Full-body circuit', 'All levels'], ['7:30 PM', 'Yoga and mobility', 'All levels']];
+  var SCHEDULE = {
+    Mon: WEEKDAY,
+    Tue: [['6:30 AM', 'Upper-body strength', 'Intermediate'], ['8:00 AM', 'Core and abs', 'All levels'], ['6:00 PM', 'HIIT cardio', 'All levels'], ['7:30 PM', 'Stretch and recover', 'All levels']],
+    Wed: [['6:30 AM', 'Strength basics', 'Beginner'], ['8:00 AM', 'Yoga and mobility', 'All levels'], ['6:00 PM', 'Lower-body strength', 'Intermediate'], ['7:30 PM', 'HIIT cardio', 'All levels']],
+    Thu: [['6:30 AM', 'HIIT cardio', 'All levels'], ['8:00 AM', 'Core and abs', 'All levels'], ['6:00 PM', 'Full-body circuit', 'All levels'], ['7:30 PM', 'Yoga and mobility', 'All levels']],
+    Fri: [['6:30 AM', 'Upper-body strength', 'Intermediate'], ['8:00 AM', 'HIIT cardio', 'All levels'], ['6:00 PM', 'Strength basics', 'Beginner'], ['7:30 PM', 'Stretch and recover', 'All levels']],
+    Sat: [['7:00 AM', 'Full-body circuit', 'All levels'], ['9:00 AM', 'HIIT cardio', 'All levels'], ['11:00 AM', 'Yoga and mobility', 'All levels']],
+    Sun: [['8:00 AM', 'Family fitness', 'All levels'], ['9:30 AM', 'Yoga and mobility', 'All levels']]
+  };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  var todayKey = DAYS[new Date().getDay()];
+  document.getElementById('todayName').textContent = FULL[todayKey];
+  document.getElementById('todayList').innerHTML = SCHEDULE[todayKey].map(function (c) {
+    return '<li><b>' + esc(c[0]) + '</b><div>' + esc(c[1]) + '<span>' + esc(c[2]) + '</span></div></li>';
+  }).join('');
+  var tabs = document.getElementById('tabs'), sched = document.getElementById('sched');
+  var order = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  tabs.innerHTML = order.map(function (k) { return '<button type="button" class="tab" data-day="' + k + '" aria-pressed="' + (k === todayKey) + '">' + k + '</button>'; }).join('');
+  function show(k) {
+    sched.innerHTML = SCHEDULE[k].map(function (c) {
+      return '<li><b>' + esc(c[0]) + '</b><span class="cls">' + esc(c[1]) + '</span><span class="lvl">' + esc(c[2]) + '</span></li>';
+    }).join('');
+    Array.prototype.forEach.call(tabs.children, function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-day') === k); });
+  }
+  tabs.addEventListener('click', function (e) { var t = e.target.closest('.tab'); if (t) show(t.getAttribute('data-day')); });
+  show(todayKey);
+
+  /* Plan buttons pre-select the plan in the join form */
+  document.querySelectorAll('[data-plan]').forEach(function (a) {
+    a.addEventListener('click', function () { document.getElementById('f-plan').value = a.getAttribute('data-plan'); });
+  });
+
+  /* BMI (WHO adult ranges) */
+  document.getElementById('bmiForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var h = parseFloat(document.getElementById('h').value), w = parseFloat(document.getElementById('w').value);
+    var err = document.getElementById('bmiError'), box = document.getElementById('bmiResult');
+    if (!(h >= 100 && h <= 250) || !(w >= 25 && w <= 300)) { box.hidden = true; err.textContent = 'Enter a height between 100 and 250 cm and a weight between 25 and 300 kg.'; return; }
+    err.textContent = '';
+    var bmi = w / Math.pow(h / 100, 2);
+    var cat = bmi < 18.5 ? 'Below the healthy range' : bmi < 25 ? 'In the healthy range' : bmi < 30 ? 'Above the healthy range' : 'Well above the healthy range';
+    document.getElementById('bmiNum').textContent = bmi.toFixed(1);
+    document.getElementById('bmiCat').textContent = cat;
+    document.getElementById('bmiPin').style.left = Math.max(0, Math.min(100, (bmi - 15) / 20 * 100)) + '%';
+    box.hidden = false;
+  });
+
+  document.querySelectorAll('form[data-wa]').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var lines = ['[Demo enquiry: ' + NAME + ']'];
+      new FormData(f).forEach(function (v, k) { if (v) lines.push(k + ': ' + v); });
+      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    });
+  });
+})();
+</script>
+</body>
+</html>
