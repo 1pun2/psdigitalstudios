@@ -36,7 +36,7 @@
 
   /* ---------- Header & footer ---------- */
   const NAV = [
-    ['home', 'index.html', 'Home'], ['services', 'services.html', 'Services'], ['portfolio', 'portfolio.html', 'Portfolio'],
+    ['home', 'index.html', 'Home'], ['services', 'services.html', 'Services'], ['plans', 'plans.html', 'Plans'], ['portfolio', 'portfolio.html', 'Portfolio'],
     ['reviews', 'reviews.html', 'Reviews'], ['about', 'about.html', 'About'], ['contact', 'contact.html', 'Contact'], ['chat', 'chat.html', 'Chat']
   ];
 
@@ -155,6 +155,23 @@
         '<div class="rev-grid">' + items.map((r) =>
           '<figure class="card rev">' + stars(Number(r.rating) || 5) + '<blockquote>' + nl2br(r.text) + '</blockquote><figcaption><strong>' + esc(r.name) + '</strong>' +
           (r.business ? '<span>' + esc(r.business) + '</span>' : '') + (r.date ? '<span>' + esc(r.date) + '</span>' : '') + '</figcaption></figure>').join('') + '</div>';
+    },
+    'plans': (el) => {
+      const pl = S.plans;
+      el.innerHTML = pl.items.map((p) =>
+        '<article class="card plan' + (p.featured ? ' featured' : '') + '">' +
+          (p.badge ? '<span class="badge">' + esc(p.badge) + '</span>' : '') +
+          '<h2>' + esc(p.name) + '</h2><p class="plan-tag">' + esc(p.tagline) + '</p>' +
+          '<div class="price"><strong>' + esc(p.price) + '</strong><span>' + esc(p.priceNote) + '</span></div>' +
+          '<ul class="ticks">' + p.features.map((f) => '<li>' + icon('check') + esc(f) + '</li>').join('') + '</ul>' +
+          '<div class="maint"><span>Monthly maintenance and checks</span><strong>' + esc(p.maintenance) + ' <small>' + esc(p.maintenanceNote) + '</small></strong></div>' +
+          '<a class="btn ' + (p.featured ? 'btn-primary' : 'btn-line') + '" href="' + waLink("Hi PS Digital Studios, I'm interested in the " + p.name + ' plan (' + p.price + ').') + '" target="_blank" rel="noopener">Choose this plan</a>' +
+        '</article>').join('');
+    },
+    'plans-note': (el) => {
+      const pl = S.plans;
+      el.innerHTML = '<div class="card"><h3>' + esc(pl.maintenanceTitle) + '</h3><p>' + esc(pl.maintenanceText) + '</p></div>' +
+        '<p class="plans-foot">' + esc(pl.note) + ' <a href="' + waLink() + '" target="_blank" rel="noopener">Message us on WhatsApp</a></p>';
     },
     'about-text': (el) => {
       el.innerHTML = '<h2>' + esc(S.about.title) + '</h2>' + S.about.paragraphs.map((t) => '<p>' + esc(t) + '</p>').join('');

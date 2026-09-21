@@ -61,6 +61,51 @@ window.SITE = {
     }
   ],
 
+  /* ---------- Plans & pricing ----------
+     Edit prices and features here. To add a plan, copy a whole { ... }, block.
+     price / maintenance are shown exactly as typed, so include the ₹ sign.     */
+  plans: {
+    intro: "Clear, simple pricing for local businesses. Pick the plan that fits your business.",
+    items: [
+      {
+        name: "Simple Website",
+        tagline: "A clean, simple website to get your business online.",
+        price: "₹5,000",
+        priceNote: "one-time",
+        maintenance: "₹500",
+        maintenanceNote: "per month",
+        features: [
+          "Simple website for your business",
+          "Works well on phones and computers",
+          "WhatsApp chat button",
+          "Your contact details and social links"
+        ],
+        featured: false,
+        badge: ""
+      },
+      {
+        name: "Professional Website",
+        tagline: "A more polished, professional website to build trust and stand out.",
+        price: "₹15,000",
+        priceNote: "one-time",
+        maintenance: "₹1,500",
+        maintenanceNote: "per month",
+        features: [
+          "More professional design and layout",
+          "More pages and sections for your business",
+          "Works well on phones and computers",
+          "WhatsApp chat button",
+          "Your contact details and social links"
+        ],
+        featured: true,
+        badge: ""
+      }
+    ],
+    maintenanceTitle: "Monthly maintenance and checks",
+    maintenanceText: "After your website goes live, the monthly fee covers regular checks and updates so your website keeps working and stays up to date.",
+    note: "Have a different requirement? Tell us what you need and we'll suggest what fits."
+  },
+
   /* ---------- Portfolio / Demo websites ----------
      HOW TO ADD A NEW ONE: copy a whole { ... }, block, paste it below the last one,
      and change the words. That's it.
@@ -190,7 +235,7 @@ window.SITE = {
   chatbot: {
     name: "PS Assistant",
     greeting: "Hi! I'm the PS Digital Studios assistant. Ask me about our services, pricing, timing or how to get started.",
-    suggestions: ["What services do you offer?", "How much does a website cost?", "How long does it take?", "Show me your work"],
+    suggestions: ["What services do you offer?", "What are your plans and prices?", "How long does it take?", "Show me your work"],
     fallback: "I'm not sure about that one. The quickest way to get a clear answer is to message us directly on WhatsApp.",
     fallbackActions: [{ label: "Ask on WhatsApp", href: "@whatsapp" }],
     answers: [
@@ -204,9 +249,9 @@ window.SITE = {
         actions: [{ label: "See all services", href: "services.html" }]
       },
       {
-        keywords: ["price", "cost", "charge", "rate", "how much", "budget", "quote", "fees", "package", "pricing"],
-        reply: "The price depends on how many pages you need and which features you want. Message us on WhatsApp with your business type and we'll give you a clear quote.",
-        actions: [{ label: "Get a quote on WhatsApp", href: "@whatsapp" }]
+        keywords: ["plan", "price", "cost", "charge", "rate", "how much", "budget", "quote", "fees", "package", "pricing"],
+        reply: "We have two plans. Simple Website: ₹5,000, with monthly maintenance and checks at ₹500. Professional Website: ₹15,000, with monthly maintenance and checks at ₹1,500. Message us if you need something different.",
+        actions: [{ label: "See plans", href: "plans.html" }, { label: "Ask on WhatsApp", href: "@whatsapp" }]
       },
       {
         keywords: ["how long", "time", "days", "weeks", "deadline", "delivery", "fast", "quick", "urgent"],
@@ -235,8 +280,8 @@ window.SITE = {
       },
       {
         keywords: ["maintenance", "update", "change", "edit", "support", "after", "fix"],
-        reply: "Yes, we offer website maintenance: updating text, photos and prices, small improvements, and help when something needs fixing.",
-        actions: [{ label: "Ask about maintenance", href: "@whatsapp" }]
+        reply: "Yes, we offer website maintenance: updating text, photos and prices, small improvements, and help when something needs fixing. Monthly maintenance and checks cost ₹500 on the Simple plan and ₹1,500 on the Professional plan.",
+        actions: [{ label: "See plans", href: "plans.html" }, { label: "Ask about maintenance", href: "@whatsapp" }]
       },
       {
         keywords: ["mobile", "responsive", "phone friendly", "tablet"],
