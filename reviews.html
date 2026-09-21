@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Reviews | PS Digital Studios</title>
+<meta name="description" content="Read what clients say about PS Digital Studios, or leave your own review.">
+<meta name="theme-color" content="#0a0c22">
+<meta property="og:title" content="Client Reviews | PS Digital Studios">
+<meta property="og:description" content="Read what clients say about PS Digital Studios, or leave your own review.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="reviews">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" id="site-header"></header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><p class="eyebrow">Reviews</p><h1>What our clients say</h1><p>Worked with us? Share your experience. It helps other local businesses decide.</p></div></section>
+<section class="section"><div class="wrap split">
+  <div data-render="reviews-list"></div>
+  <div class="card form-card">
+    <h2>Leave a review</h2>
+    <p>It takes a minute. We read every review before it appears on the site.</p>
+    <form id="review-form">
+      <div class="field"><span class="lab" id="rate-lab">Your rating</span>
+        <div class="rating-input" role="radiogroup" aria-labelledby="rate-lab">
+          <input type="radio" id="r5" name="rating" value="5"><label for="r5" title="5 stars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg></label>
+          <input type="radio" id="r4" name="rating" value="4"><label for="r4" title="4 stars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg></label>
+          <input type="radio" id="r3" name="rating" value="3"><label for="r3" title="3 stars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg></label>
+          <input type="radio" id="r2" name="rating" value="2"><label for="r2" title="2 stars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg></label>
+          <input type="radio" id="r1" name="rating" value="1"><label for="r1" title="1 star"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg></label>
+        </div>
+      </div>
+      <div class="field"><label for="rv-name">Your name</label><input id="rv-name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="rv-biz">Business name (optional)</label><input id="rv-biz" name="business" autocomplete="organization"></div>
+      <div class="field"><label for="rv-msg">Your review</label><textarea id="rv-msg" name="message" required placeholder="What was it like working with PS Digital Studios?"></textarea></div>
+      <div class="hp" aria-hidden="true"><label>Leave this empty<input name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn btn-primary" type="submit">Send review</button>
+      <div id="review-status" class="form-status" role="status" tabindex="-1"></div>
+    </form>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer" id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

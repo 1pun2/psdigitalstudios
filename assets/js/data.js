@@ -1,0 +1,276 @@
+/* ==========================================================================
+   PS DIGITAL STUDIOS – SITE DATA
+   This is the ONLY file you need to edit to change the website content.
+   Save the file, upload it to GitHub, and the site updates in a minute.
+   ========================================================================== */
+
+window.SITE = {
+
+  /* ---------- Brand ---------- */
+  brand: {
+    name: "PS Digital Studios",
+    tagline: "Your business. Better online."
+  },
+
+  /* ---------- Contact ---------- */
+  contact: {
+    whatsappNumber: "919305012250",           // country code + number, no + or spaces
+    whatsappDisplay: "+91 93050 12250",
+    whatsappMessage: "Hi PS Digital Studios, I'd like a website for my business.",
+    instagramUrl: "https://www.instagram.com/ps_digitalstudios?stkn=MW9rOTBvMXgybm1lOA==",
+    instagramHandle: "@ps_digitalstudios",
+    email: ""                                  // optional, e.g. "hello@yourmail.com"
+  },
+
+  /* ---------- Home page hero ---------- */
+  hero: {
+    eyebrow: "Websites for local businesses",
+    title1: "Your Business.",
+    accent: "Better",
+    title2: "Online.",
+    text: "We design modern, fast and professional websites for local businesses, so you can get more customers, build trust and grow your brand.",
+    showcaseProject: 0        // which project (by position, starting at 0) appears in the laptop and phone
+  },
+
+  /* ---------- Services ----------
+     icon options: monitor, bolt, gear, pin, chat, star, mail                */
+  services: [
+    {
+      icon: "monitor",
+      title: "Business Websites",
+      short: "Professional websites for your brand, services and customers.",
+      includes: ["Multi-page design that matches your brand", "Looks right on phones, tablets and computers", "Contact details, map and social links", "Clean, fast-loading pages"]
+    },
+    {
+      icon: "bolt",
+      title: "Landing Pages",
+      short: "Focused pages designed to turn visitors into enquiries or sales.",
+      includes: ["One page built around one goal", "Clear offer and call-to-action", "Ideal for a promotion, launch or event", "Quick to build and quick to load"]
+    },
+    {
+      icon: "gear",
+      title: "Website Maintenance",
+      short: "Updates, improvements and ongoing support when you need it.",
+      includes: ["Text, photo and price updates", "Fixes and small improvements", "Adding new pages or sections", "Help when something looks wrong"]
+    },
+    {
+      icon: "pin",
+      title: "WhatsApp Integration",
+      short: "Let your customers reach you instantly with one click.",
+      includes: ["Chat button on every page", "Message pre-filled with your business name", "Works on phone and desktop", "Customers reach you where they already chat"]
+    }
+  ],
+
+  /* ---------- Portfolio / Demo websites ----------
+     HOW TO ADD A NEW ONE: copy a whole { ... }, block, paste it below the last one,
+     and change the words. That's it.
+
+     name        Business name
+     category    Used for the filter buttons on the Portfolio page (e.g. "Restaurant & Café")
+     headline    Big text shown on the preview picture
+     button      Button text shown on the preview picture
+     description Short line about the project
+     url         Link to the live website. Leave "" if there isn't one yet
+     image       Optional. A real screenshot, e.g. "assets/img/portfolio/my-client.jpg"
+                 Leave "" to use the automatic preview picture instead.
+     theme       Colours for the automatic preview: bg (background), fg (text),
+                 accent (button), onAccent (button text)                       */
+  projects: [
+    {
+      name: "Aura Salon",
+      category: "Salon & Beauty",
+      headline: "Look Good Feel Great",
+      button: "Book Appointment",
+      description: "Hair and beauty salon website with services and easy booking.",
+      url: "",
+      image: "",
+      theme: { bg: "#2a1b19", fg: "#ffffff", accent: "#f4a99a", onAccent: "#3a1712" }
+    },
+    {
+      name: "Forge Fitness",
+      category: "Gym & Fitness",
+      headline: "Stronger Every Day",
+      button: "Join Today",
+      description: "Gym website with plans, timings and a join-now button.",
+      url: "",
+      image: "",
+      theme: { bg: "#0f1013", fg: "#ffffff", accent: "#22c55e", onAccent: "#04210f" }
+    },
+    {
+      name: "Cafe Verde",
+      category: "Restaurant & Café",
+      headline: "Good Food Good Mood",
+      button: "View Menu",
+      description: "Café website with menu, gallery and location.",
+      url: "",
+      image: "",
+      theme: { bg: "#10291d", fg: "#ffffff", accent: "#f3efe2", onAccent: "#10291d" }
+    },
+    {
+      name: "Smile Dental Clinic",
+      category: "Dental Clinic",
+      headline: "Healthy Smiles Brighter Futures",
+      button: "Book a Visit",
+      description: "Clinic website with treatments, doctors and appointments.",
+      url: "",
+      image: "",
+      theme: { bg: "#eaf4ff", fg: "#12305a", accent: "#3b9ae1", onAccent: "#ffffff" }
+    },
+    {
+      name: "Urban Interiors",
+      category: "Interior Design",
+      headline: "Designing Better Spaces",
+      button: "See Projects",
+      description: "Interior design studio website with a project gallery.",
+      url: "",
+      image: "",
+      theme: { bg: "#e8e1d4", fg: "#2d2a24", accent: "#8a7a5c", onAccent: "#ffffff" }
+    }
+
+    /* ,{ ADD YOUR NEXT PROJECT HERE (put a comma after the block above) } */
+  ],
+
+  /* ---------- Reviews ----------
+     Clients send reviews from the Reviews page. YOU approve them and paste
+     the good ones here so they show on the site. See README.md, "Reviews".
+
+     formEndpoint: paste your Formspree link here (free) so reviews arrive in
+     your email. Example: "https://formspree.io/f/abcdwxyz"
+     If you leave it empty, the review form opens WhatsApp with the review
+     already typed, so it still works.                                        */
+  reviews: {
+    formEndpoint: "",
+    items: [
+      // Example (remove the two slashes at the start of each line to use it):
+      // {
+      //   name: "Client name",
+      //   business: "Business name",
+      //   rating: 5,
+      //   text: "What the client said about working with you.",
+      //   date: "September 2026"
+      // },
+    ]
+  },
+
+  /* ---------- About page ---------- */
+  about: {
+    title: "A small studio that builds websites for local businesses.",
+    paragraphs: [
+      "PS Digital Studios helps local businesses get found online. We build clean, fast websites that show what you do, earn trust, and make it easy for customers to contact you.",
+      "Most of your customers are already on their phones and on WhatsApp. So we build every site to work well on a phone and to put a chat button right where people need it."
+    ],
+    points: [
+      "Looks great on every screen size",
+      "WhatsApp chat built into every page",
+      "Simple, honest communication",
+      "Support after your site goes live"
+    ]
+  },
+
+  /* ---------- How we work (shown on Services and About pages) ---------- */
+  process: [
+    { title: "You tell us about your business", text: "Message us on WhatsApp with what you do and what you need." },
+    { title: "We design your website", text: "We build a first version with your name, colours and content." },
+    { title: "You review and request changes", text: "Tell us what to adjust until you are happy." },
+    { title: "Your website goes live", text: "We publish it and stay available for updates." }
+  ],
+
+  /* ---------- Call-to-action banner ---------- */
+  cta: {
+    title: "Ready to take your business online?",
+    text: "Let's create a website that works for you."
+  },
+
+  /* ---------- Chat assistant ----------
+     Each answer has:
+       keywords  words a visitor might type (lowercase)
+       reply     what the assistant says
+       actions   optional buttons. href can be "@whatsapp", "@instagram",
+                 or a page like "portfolio.html"                             */
+  chatbot: {
+    name: "PS Assistant",
+    greeting: "Hi! I'm the PS Digital Studios assistant. Ask me about our services, pricing, timing or how to get started.",
+    suggestions: ["What services do you offer?", "How much does a website cost?", "How long does it take?", "Show me your work"],
+    fallback: "I'm not sure about that one. The quickest way to get a clear answer is to message us directly on WhatsApp.",
+    fallbackActions: [{ label: "Ask on WhatsApp", href: "@whatsapp" }],
+    answers: [
+      {
+        keywords: ["hi", "hello", "hey", "namaste", "hii", "good morning", "good evening"],
+        reply: "Hello! How can I help you today? You can ask about services, pricing, timelines or our past work."
+      },
+      {
+        keywords: ["service", "offer", "what do you do", "provide", "make", "build", "create"],
+        reply: "We build business websites and landing pages for local businesses, add WhatsApp chat buttons, and maintain websites after launch.",
+        actions: [{ label: "See all services", href: "services.html" }]
+      },
+      {
+        keywords: ["price", "cost", "charge", "rate", "how much", "budget", "quote", "fees", "package", "pricing"],
+        reply: "The price depends on how many pages you need and which features you want. Message us on WhatsApp with your business type and we'll give you a clear quote.",
+        actions: [{ label: "Get a quote on WhatsApp", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["how long", "time", "days", "weeks", "deadline", "delivery", "fast", "quick", "urgent"],
+        reply: "The timeline depends on the size of the website. A simple site is usually quicker than a multi-page one. Tell us your deadline on WhatsApp and we'll confirm what's possible.",
+        actions: [{ label: "Tell us your deadline", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["portfolio", "demo", "work", "example", "sample", "previous", "past", "projects", "see"],
+        reply: "You can see our demo websites and client projects on the Portfolio page.",
+        actions: [{ label: "View portfolio", href: "portfolio.html" }]
+      },
+      {
+        keywords: ["contact", "call", "phone", "number", "reach", "talk", "speak"],
+        reply: "The fastest way to reach us is WhatsApp. You can also send a message through the Contact page or find us on Instagram.",
+        actions: [{ label: "Chat on WhatsApp", href: "@whatsapp" }, { label: "Contact page", href: "contact.html" }]
+      },
+      {
+        keywords: ["whatsapp"],
+        reply: "Yes, we can add a WhatsApp chat button to your website so customers can message you in one tap. You can also chat with us directly on WhatsApp.",
+        actions: [{ label: "Chat on WhatsApp", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["instagram", "insta", "social"],
+        reply: "You can follow our work on Instagram at @ps_digitalstudios.",
+        actions: [{ label: "Open Instagram", href: "@instagram" }]
+      },
+      {
+        keywords: ["maintenance", "update", "change", "edit", "support", "after", "fix"],
+        reply: "Yes, we offer website maintenance: updating text, photos and prices, small improvements, and help when something needs fixing.",
+        actions: [{ label: "Ask about maintenance", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["mobile", "responsive", "phone friendly", "tablet"],
+        reply: "Every website we build is designed to look and work well on phones, tablets and computers."
+      },
+      {
+        keywords: ["landing"],
+        reply: "A landing page is a single focused page built to get one result, like enquiries for an offer. It's a good choice for a promotion or a new launch.",
+        actions: [{ label: "Discuss a landing page", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["domain", "hosting", "host", "server"],
+        reply: "Domain and hosting depend on your website's needs. Message us on WhatsApp and we'll explain the options for your business.",
+        actions: [{ label: "Ask on WhatsApp", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["where", "location", "city", "area", "based", "local"],
+        reply: "We work with local businesses. Message us on WhatsApp and tell us where you are and we'll let you know how we can help.",
+        actions: [{ label: "Message us", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["review", "testimonial", "feedback", "rating"],
+        reply: "Clients can leave a review on our Reviews page at any time. You can also read what others have said there.",
+        actions: [{ label: "Reviews page", href: "reviews.html" }]
+      },
+      {
+        keywords: ["start", "begin", "process", "how does it work", "how do i", "steps", "get started", "order"],
+        reply: "It's simple: 1) message us about your business, 2) we design your website, 3) you review it and request changes, 4) we publish it. The first step is a message on WhatsApp.",
+        actions: [{ label: "Get started", href: "@whatsapp" }]
+      },
+      {
+        keywords: ["thanks", "thank you", "thx", "ok thanks", "great", "bye"],
+        reply: "You're welcome! If you need anything else, just ask or message us on WhatsApp."
+      }
+    ]
+  }
+};
