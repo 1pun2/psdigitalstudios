@@ -124,42 +124,42 @@ window.SITE = {
     {
       name: "Aura Salon",
       category: "Salon & Beauty",
-      headline: "Look Good Feel Great",
-      button: "Book Appointment",
-      description: "Hair and beauty salon website with services and easy booking.",
-      url: "",
+      headline: "Look good. Feel great.",
+      button: "Book appointment",
+      description: "Hair, skin and bridal studio website with a price menu, packages and WhatsApp booking.",
+      url: "https://1pun2.github.io/psdigitalstudios/demos/aura-salon/",
       image: "",
-      theme: { bg: "#2a1b19", fg: "#ffffff", accent: "#f4a99a", onAccent: "#3a1712" }
+      theme: { bg: "#2b1233", fg: "#ffffff", accent: "#f7b59c", onAccent: "#2b1233" }
     },
     {
       name: "Forge Fitness",
       category: "Gym & Fitness",
-      headline: "Stronger Every Day",
-      button: "Join Today",
-      description: "Gym website with plans, timings and a join-now button.",
-      url: "",
+      headline: "Stronger every day.",
+      button: "Book a free trial",
+      description: "Gym website with a live class timetable, membership plans, BMI check and free-trial booking.",
+      url: "https://1pun2.github.io/psdigitalstudios/demos/forge-fitness/",
       image: "",
-      theme: { bg: "#0f1013", fg: "#ffffff", accent: "#22c55e", onAccent: "#04210f" }
+      theme: { bg: "#f1efe8", fg: "#101114", accent: "#2f4bff", onAccent: "#ffffff" }
     },
     {
       name: "Cafe Verde",
       category: "Restaurant & Café",
-      headline: "Good Food Good Mood",
-      button: "View Menu",
-      description: "Café website with menu, gallery and location.",
-      url: "",
+      headline: "Good food. Good mood.",
+      button: "View menu",
+      description: "Café website with a tabbed menu, veg and non-veg marks, and table reservations on WhatsApp.",
+      url: "https://1pun2.github.io/psdigitalstudios/demos/cafe-verde/",
       image: "",
-      theme: { bg: "#10291d", fg: "#ffffff", accent: "#f3efe2", onAccent: "#10291d" }
+      theme: { bg: "#113a2c", fg: "#ffffff", accent: "#f6dd8b", onAccent: "#113a2c" }
     },
     {
       name: "Smile Dental Clinic",
       category: "Dental Clinic",
-      headline: "Healthy Smiles Brighter Futures",
-      button: "Book a Visit",
-      description: "Clinic website with treatments, doctors and appointments.",
-      url: "",
+      headline: "Healthy smiles. Brighter futures.",
+      button: "Book appointment",
+      description: "Dental clinic website with treatments, dentist profiles, FAQs and appointment requests on WhatsApp.",
+      url: "https://1pun2.github.io/psdigitalstudios/demos/smile-dental-clinic/",
       image: "",
-      theme: { bg: "#eaf4ff", fg: "#12305a", accent: "#3b9ae1", onAccent: "#ffffff" }
+      theme: { bg: "#f5f9f9", fg: "#0b2545", accent: "#0b7a70", onAccent: "#ffffff" }
     },
     {
       name: "Urban Interiors",
