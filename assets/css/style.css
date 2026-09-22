@@ -173,6 +173,25 @@ a.live:hover { text-decoration: underline; }
 .about-text p { color: var(--muted); margin-top: 16px; max-width: 34em; }
 .about-text h2 { max-width: 16em; }
 
+/* Founder */
+.founder-card { display: grid; grid-template-columns: 300px 1fr; gap: 0; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.founder-photo { background: #1c1440; }
+.founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.founder-body { padding: 34px 36px; }
+.founder-body h2 { font-size: 1.5rem; }
+.founder-role { color: var(--indigo-d); font-weight: 700; margin-top: 4px; }
+.founder-body hr { border: 0; border-top: 1px solid var(--line); margin: 18px 0; }
+.founder-bio { color: var(--muted); }
+.founder-more { margin-top: 14px; display: grid; gap: 12px; color: var(--muted); }
+.founder-more[hidden] { display: none; }
+.founder-toggle { margin-top: 16px; }
+.founder-quote { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); font-style: italic; color: var(--ink); font-weight: 600; }
+@media (max-width: 700px) {
+  .founder-card { grid-template-columns: 1fr; }
+  .founder-photo { aspect-ratio: 4 / 3; }
+  .founder-body { padding: 26px 22px; }
+}
+
 /* Reviews */
 .rev-sum { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: var(--muted); flex-wrap: wrap; }
 .rev-sum strong { color: var(--ink); font-size: 1.3rem; }
