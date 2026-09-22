@@ -173,6 +173,32 @@
       el.innerHTML = '<div class="card"><h3>' + esc(pl.maintenanceTitle) + '</h3><p>' + esc(pl.maintenanceText) + '</p></div>' +
         '<p class="plans-foot">' + esc(pl.note) + ' <a href="' + waLink() + '" target="_blank" rel="noopener">Message us on WhatsApp</a></p>';
     },
+    'founder': (el) => {
+      const f = S.founder;
+      if (!f || !f.name) { el.hidden = true; return; }
+      const photo = f.photo ? '<div class="founder-photo"><img src="' + esc(f.photo) + '" alt="Photo of ' + esc(f.name) + '" loading="lazy"></div>' : '';
+      const more = (f.moreBio || []).map((p) => '<p>' + esc(p) + '</p>').join('');
+      el.innerHTML =
+        '<div class="founder-card">' + photo +
+        '<div class="founder-body">' +
+          '<h2>' + esc(f.name) + '</h2>' +
+          (f.role ? '<p class="founder-role">' + esc(f.role) + '</p>' : '') +
+          '<hr>' +
+          '<p class="founder-bio">' + esc(f.shortBio) + '</p>' +
+          (more ? '<div class="founder-more" hidden>' + more + '</div><button type="button" class="btn btn-line btn-sm founder-toggle">Show bio</button>' : '') +
+          (f.quote ? '<p class="founder-quote">' + esc(f.quote) + '</p>' : '') +
+        '</div></div>';
+      const btn = $('.founder-toggle', el), more_ = $('.founder-more', el);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const open = more_.hidden;
+          more_.hidden = !open;
+          btn.textContent = open ? 'Hide bio' : 'Show bio';
+          btn.setAttribute('aria-expanded', open);
+        });
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    },
     'about-text': (el) => {
       el.innerHTML = '<h2>' + esc(S.about.title) + '</h2>' + S.about.paragraphs.map((t) => '<p>' + esc(t) + '</p>').join('');
     },

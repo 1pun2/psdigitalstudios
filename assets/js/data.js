@@ -197,6 +197,22 @@ window.SITE = {
     ]
   },
 
+  /* ---------- Founder / About photo ----------
+     Edit your name, role and bio here. shortBio shows first; the rest shows
+     when the visitor clicks "Show bio". Leave photo "" to hide the picture.  */
+  founder: {
+    photo: "assets/img/founder-puneet.jpg",
+    name: "Puneet Singh",
+    role: "Founder & Web Designer",
+    shortBio: "I'm Puneet, the founder of PS Digital Studios. I create modern, responsive websites for local businesses, focusing on clean design, simple navigation, and making it easy for customers to connect with your business.",
+    moreBio: [
+      "I started PS Digital Studios because too many good local businesses are hard to find online, or don't have a website at all. I wanted to change that with websites that are simple to use, quick to load, and built around how customers actually search for and contact a business.",
+      "Every project starts with a conversation about your business, not a template. From there I design something that fits your brand, works well on a phone, and makes it easy for customers to reach you on WhatsApp.",
+      "When I'm not building websites, I'm learning new design and development skills so PS Digital Studios can keep offering better work to local businesses."
+    ],
+    quote: "Building PS Digital Studios, one business at a time."
+  },
+
   /* ---------- About page ---------- */
   about: {
     title: "A small studio that builds websites for local businesses.",
