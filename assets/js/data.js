@@ -197,6 +197,72 @@ window.SITE = {
     ]
   },
 
+  /* ---------- Blog ----------
+     HOW THIS "CHANGES DAILY": every post below has a "date" (YYYY-MM-DD).
+     The blog page always shows the post whose date is closest to today,
+     without going past today -- so as each date arrives, that day's post
+     appears automatically, with no need to touch the code that day.
+     To add tomorrow's post: copy a whole { ... }, block, paste it above
+     the oldest one, give it a new date and write the content. The site
+     does the rest by itself the moment that date arrives.
+     If today is past every date below, the most recent post keeps showing
+     until you add a new one -- so add a few posts ahead so it never runs out.  */
+  blog: {
+    intro: "Short, practical posts on websites and getting found online, for local business owners.",
+    posts: [
+      {
+        date: "2026-09-23",
+        title: "Does your business really need a website?",
+        tag: "Getting started",
+        body: [
+          "Short answer: if customers ever search for you, check your hours, or decide whether to trust you before visiting, yes.",
+          "A website does three jobs at once. It shows you're real and open. It puts your services, timings and location in one place instead of scattered across old posts. And it gives people a one-tap way to reach you on WhatsApp instead of hunting for your number.",
+          "You don't need anything huge to start. A single clean page with what you do, where you are, and a WhatsApp button already puts you ahead of most local businesses that have nothing online at all."
+        ]
+      },
+      {
+        date: "2026-09-24",
+        title: "3 things every local business website needs",
+        tag: "Website tips",
+        body: [
+          "1. Your services and location, right up front. Visitors decide in seconds whether they're in the right place.",
+          "2. A WhatsApp or call button that's easy to find. Most people would rather message than fill out a form.",
+          "3. A design that works well on a phone. The majority of your visitors will open your site on their phone first, not a computer."
+        ]
+      },
+      {
+        date: "2026-09-25",
+        title: "Why we build every website mobile-first",
+        tag: "Behind the scenes",
+        body: [
+          "Most visitors to a local business website are on their phone, often while walking, in a shop, or deciding where to go next. If a site is slow or hard to tap on a small screen, they leave.",
+          "That's why every website we build starts with the phone layout, not the desktop one. Buttons are big enough to tap, text is readable without zooming, and the WhatsApp button is always within thumb's reach.",
+          "The desktop version still looks great, but the phone version is the one that has to work perfectly, because that's where most of your customers are."
+        ]
+      },
+      {
+        date: "2026-09-26",
+        title: "What to send us to get a faster, better website",
+        tag: "Working with us",
+        body: [
+          "The fastest projects start with a little preparation. Before you message us, it helps to have: your business name and what you do, your services or menu with prices if you want them shown, your address and opening hours, and a few photos if you have them.",
+          "You don't need a logo, a colour scheme, or fancy copywriting. We can design around what you already have, and suggest colours and wording if you're not sure.",
+          "The one thing that matters most: tell us what you want a visitor to do after reading your site, whether that's booking, calling, or visiting. Everything else follows from that."
+        ]
+      },
+      {
+        date: "2026-09-27",
+        title: "WhatsApp button vs. contact form: why we choose WhatsApp",
+        tag: "Website tips",
+        body: [
+          "A contact form asks a visitor to type a message, fill in their email, and wait for a reply. A WhatsApp button opens a chat they already know how to use, with your business name pre-filled in the message.",
+          "For a local business, that difference matters. WhatsApp feels personal and immediate, which is exactly what someone wants when they're deciding whether to book a table, an appointment, or a service.",
+          "That's why every website we build puts a WhatsApp button in the same easy-to-reach spot on every page, not buried at the bottom in a form."
+        ]
+      }
+    ]
+  },
+
   /* ---------- Founder / About photo ----------
      Edit your name, role and bio here. shortBio shows first; the rest shows
      when the visitor clicks "Show bio". Leave photo "" to hide the picture.  */

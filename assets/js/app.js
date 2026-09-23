@@ -36,7 +36,7 @@
 
   /* ---------- Header & footer ---------- */
   const NAV = [
-    ['home', 'index.html', 'Home'], ['services', 'services.html', 'Services'], ['plans', 'plans.html', 'Plans'], ['portfolio', 'portfolio.html', 'Portfolio'],
+    ['home', 'index.html', 'Home'], ['services', 'services.html', 'Services'], ['plans', 'plans.html', 'Plans'], ['blog', 'blog.html', 'Blog'], ['portfolio', 'portfolio.html', 'Portfolio'],
     ['reviews', 'reviews.html', 'Reviews'], ['about', 'about.html', 'About'], ['contact', 'contact.html', 'Contact'], ['chat', 'chat.html', 'Chat']
   ];
 
@@ -172,6 +172,32 @@
       const pl = S.plans;
       el.innerHTML = '<div class="card"><h3>' + esc(pl.maintenanceTitle) + '</h3><p>' + esc(pl.maintenanceText) + '</p></div>' +
         '<p class="plans-foot">' + esc(pl.note) + ' <a href="' + waLink() + '" target="_blank" rel="noopener">Message us on WhatsApp</a></p>';
+    },
+    'blog-today': (el) => {
+      const posts = (S.blog && S.blog.posts) || [];
+      if (!posts.length) { el.innerHTML = '<div class="empty-card"><h3>No posts yet</h3><p>Check back soon.</p></div>'; return; }
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const sorted = posts.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+      let post = null;
+      for (const p of sorted) { if (p.date <= todayStr) post = p; }
+      if (!post) post = sorted[0];
+      const dateNice = new Date(post.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+      el.innerHTML =
+        '<article class="blog-today">' +
+          '<div class="blog-meta"><span class="blog-tag">' + esc(post.tag || 'Blog') + '</span><span class="blog-date">' + esc(dateNice) + '</span></div>' +
+          '<h2>' + esc(post.title) + '</h2>' +
+          post.body.map((p) => '<p>' + esc(p) + '</p>').join('') +
+        '</article>';
+    },
+    'blog-archive': (el) => {
+      const posts = (S.blog && S.blog.posts) || [];
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const past = posts.filter((p) => p.date <= todayStr).sort((a, b) => a.date < b.date ? 1 : -1);
+      if (past.length <= 1) { el.hidden = true; return; }
+      el.innerHTML = '<h3>Earlier posts</h3><ul class="blog-list">' + past.slice(1).map((p) => {
+        const d = new Date(p.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+        return '<li><span class="blog-list-date">' + esc(d) + '</span><span>' + esc(p.title) + '</span></li>';
+      }).join('') + '</ul>';
     },
     'founder': (el) => {
       const f = S.founder;
