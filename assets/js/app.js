@@ -9,6 +9,8 @@
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
   const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const nl2br = (v) => esc(v).replace(/\n/g, '<br>');
+  const TAG_COLORS = ['#6366f1', '#12a04a', '#c94b78', '#0b7a70', '#b7791f', '#2f4bff'];
+  const tagColor = (tag) => { let h = 0; for (const c of String(tag || '')) h = (h * 31 + c.charCodeAt(0)) >>> 0; return TAG_COLORS[h % TAG_COLORS.length]; };
   const waLink = (msg) => 'https://wa.me/' + S.contact.whatsappNumber + '?text=' + encodeURIComponent(msg || S.contact.whatsappMessage);
 
   /* ---------- Icons ---------- */
@@ -173,33 +175,100 @@
       el.innerHTML = '<div class="card"><h3>' + esc(pl.maintenanceTitle) + '</h3><p>' + esc(pl.maintenanceText) + '</p></div>' +
         '<p class="plans-foot">' + esc(pl.note) + ' <a href="' + waLink() + '" target="_blank" rel="noopener">Message us on WhatsApp</a></p>';
     },
-    'blog-today': (el) => {
+    'blog-hub': (el) => {
       const posts = (S.blog && S.blog.posts) || [];
       if (!posts.length) { el.innerHTML = '<div class="empty-card"><h3>No posts yet</h3><p>Check back soon.</p></div>'; return; }
       const todayStr = new Date().toISOString().slice(0, 10);
       const sorted = posts.slice().sort((a, b) => a.date < b.date ? -1 : 1);
-      let post = null;
-      for (const p of sorted) { if (p.date <= todayStr) post = p; }
-      if (!post) post = sorted[0];
-      const dateNice = new Date(post.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+      let featured = null;
+      for (const p of sorted) { if (p.date <= todayStr) featured = p; }
+      if (!featured) featured = sorted[0];
+      const rest = posts.filter((p) => p !== featured).sort((a, b) => a.date < b.date ? 1 : -1);
+      const tags = Array.from(new Set(posts.map((p) => p.tag || 'Blog')));
+
+      const words = (p) => p.body.join(' ').split(/\s+/).length;
+      const readMins = (p) => Math.max(1, Math.round(words(p) / 200));
+      const niceDate = (d) => new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+      const niceDateShort = (d) => new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+      const thumb = (p, big) => '<div class="blog-thumb' + (big ? ' big' : '') + '" style="--tc:' + tagColor(p.tag) + '"><span class="blog-thumb-tag">' + esc(p.tag || 'Blog') + '</span>' + icon('bolt', 'blog-thumb-ic') + '</div>';
+
       el.innerHTML =
-        '<article class="blog-today">' +
-          '<div class="blog-meta"><span class="blog-tag">' + esc(post.tag || 'Blog') + '</span><span class="blog-date">' + esc(dateNice) + '</span></div>' +
-          '<h2>' + esc(post.title) + '</h2>' +
-          post.body.map((p) => '<p>' + esc(p) + '</p>').join('') +
-        '</article>';
+        '<article class="blog-featured" id="post-' + featured.date + '">' +
+          thumb(featured, true) +
+          '<div class="blog-featured-body">' +
+            '<span class="blog-tag" style="--tc:' + tagColor(featured.tag) + '">' + esc(featured.tag || 'Blog') + '</span>' +
+            '<h2>' + esc(featured.title) + '</h2>' +
+            '<p class="blog-meta-line">' + esc(niceDate(featured.date)) + ' &middot; ' + readMins(featured) + ' min read</p>' +
+            '<p class="blog-excerpt">' + esc(featured.body[0]) + '</p>' +
+            '<div class="blog-full" hidden>' + featured.body.slice(1).map((p) => '<p>' + esc(p) + '</p>').join('') + '</div>' +
+            '<button type="button" class="btn btn-primary btn-sm blog-toggle">Read post</button>' +
+          '</div>' +
+        '</article>' +
+        '<div class="blog-layout">' +
+          '<aside class="blog-side">' +
+            '<div class="field"><label for="blog-search">Search</label><input id="blog-search" type="search" placeholder="Search posts..."></div>' +
+            '<h3 class="blog-side-title">Topics</h3>' +
+            '<div class="blog-chip-list" id="blog-chips" role="group" aria-label="Filter by topic">' +
+              '<button type="button" class="chip active" data-tag="All">All</button>' +
+              tags.map((t) => '<button type="button" class="chip" data-tag="' + esc(t) + '" style="--tc:' + tagColor(t) + '">' + esc(t) + '</button>').join('') +
+            '</div>' +
+          '</aside>' +
+          '<div class="blog-list" id="blog-list">' +
+            rest.map((p) => (
+              '<article class="blog-row" data-tag="' + esc(p.tag || 'Blog') + '" data-title="' + esc(p.title.toLowerCase()) + '" id="post-' + p.date + '">' +
+                thumb(p, false) +
+                '<div class="blog-row-body">' +
+                  '<span class="blog-tag" style="--tc:' + tagColor(p.tag) + '">' + esc(p.tag || 'Blog') + '</span>' +
+                  '<h3 class="blog-row-title">' + esc(p.title) + '</h3>' +
+                  '<p class="blog-meta-line">' + esc(niceDateShort(p.date)) + ' &middot; ' + readMins(p) + ' min read</p>' +
+                  '<div class="blog-full" hidden>' + p.body.map((b) => '<p>' + esc(b) + '</p>').join('') + '</div>' +
+                  '<button type="button" class="blog-toggle-link">Read post ' + icon('arrow') + '</button>' +
+                '</div>' +
+              '</article>'
+            )).join('') +
+            (rest.length ? '' : '<p class="blog-empty-note">More posts appear here as new days arrive.</p>') +
+          '</div>' +
+        '</div>';
+
+      // toggles (featured + each row)
+      $$('.blog-toggle, .blog-toggle-link', el).forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.blog-featured, .blog-row');
+          const full = $('.blog-full', card);
+          const open = full.hidden;
+          full.hidden = !open;
+          if (btn.classList.contains('blog-toggle')) btn.textContent = open ? 'Show less' : 'Read post';
+          else btn.innerHTML = (open ? 'Show less ' : 'Read post ') + icon('arrow');
+        });
+      });
+
+      // search + tag filter
+      const search = $('#blog-search', el), chips = $('#blog-chips', el), rows = () => $$('.blog-row', el);
+      let activeTag = 'All';
+      function applyFilter() {
+        const q = (search.value || '').toLowerCase().trim();
+        rows().forEach((row) => {
+          const matchesTag = activeTag === 'All' || row.getAttribute('data-tag') === activeTag;
+          const matchesSearch = !q || row.getAttribute('data-title').includes(q);
+          row.hidden = !(matchesTag && matchesSearch);
+        });
+        const visible = rows().filter((r) => !r.hidden).length;
+        let note = $('.blog-no-results', el);
+        if (!visible) {
+          if (!note) { note = document.createElement('p'); note.className = 'blog-empty-note blog-no-results'; $('#blog-list', el).appendChild(note); }
+          note.textContent = 'No posts match that search yet.';
+        } else if (note) { note.remove(); }
+      }
+      chips.addEventListener('click', (e) => {
+        const b = e.target.closest('.chip'); if (!b) return;
+        activeTag = b.getAttribute('data-tag');
+        $$('.chip', chips).forEach((c) => c.classList.toggle('active', c === b));
+        applyFilter();
+      });
+      search.addEventListener('input', applyFilter);
     },
-    'blog-archive': (el) => {
-      const posts = (S.blog && S.blog.posts) || [];
-      const todayStr = new Date().toISOString().slice(0, 10);
-      const past = posts.filter((p) => p.date <= todayStr).sort((a, b) => a.date < b.date ? 1 : -1);
-      if (past.length <= 1) { el.hidden = true; return; }
-      el.innerHTML = '<h3>Earlier posts</h3><ul class="blog-list">' + past.slice(1).map((p) => {
-        const d = new Date(p.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
-        return '<li><span class="blog-list-date">' + esc(d) + '</span><span>' + esc(p.title) + '</span></li>';
-      }).join('') + '</ul>';
-    },
-    'founder': (el) => {
+        'founder': (el) => {
       const f = S.founder;
       if (!f || !f.name) { el.hidden = true; return; }
       const photo = f.photo ? '<div class="founder-photo"><img src="' + esc(f.photo) + '" alt="Photo of ' + esc(f.name) + '" loading="lazy"></div>' : '';

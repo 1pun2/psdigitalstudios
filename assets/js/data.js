@@ -209,6 +209,8 @@ window.SITE = {
      until you add a new one -- so add a few posts ahead so it never runs out.  */
   blog: {
     intro: "Short, practical posts on websites and getting found online, for local business owners.",
+    /* Each tag below gets its own colour automatically (see tagColor in app.js).
+       Add a new tag simply by typing it on a post -- no extra setup needed.       */
     posts: [
       {
         date: "2026-09-23",
