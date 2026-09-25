@@ -57,6 +57,27 @@ ul, ol { padding: 0; list-style: none; }
 .icon-btn:hover { background: rgba(255, 255, 255, .1); }
 .menu-btn { display: none; }
 
+
+/* Nav mega-menu */
+.nav-mega-item { position: relative; }
+.nav-mega-trigger { display: inline-flex; align-items: center; gap: 6px; padding: 8px 13px; background: none; border: 0; color: #b7bad6; font: 500 .92rem var(--font); cursor: pointer; border-bottom: 2px solid transparent; }
+.nav-mega-trigger:hover, .nav-mega-trigger.is-current { color: #fff; }
+.nav-mega-trigger.is-current { border-color: var(--indigo); }
+.nav-chevron { width: 15px; height: 15px; stroke-width: 2.4; transition: transform .2s ease; }
+.nav-mega-item.open .nav-chevron { transform: rotate(180deg); }
+.mega-panel { position: absolute; top: calc(100% + 18px); left: 50%; transform: translateX(-50%) translateY(8px); width: 560px; max-width: 86vw; background: #12153a; border: 1px solid rgba(255, 255, 255, .1); border-radius: 18px; box-shadow: 0 30px 70px rgba(5, 6, 20, .55); padding: 26px; display: grid; grid-template-columns: 1fr 220px; gap: 8px 28px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s ease, transform .18s ease; z-index: 60; }
+.nav-mega-item.open .mega-panel { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.mega-cols { display: grid; gap: 4px; }
+.mega-col-heading { color: #8b8fc7; font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+.mega-link { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; color: #dcdeef; font-size: .92rem; font-weight: 500; }
+.mega-link .ic { width: 19px; height: 19px; color: var(--indigo); flex: none; }
+.mega-link:hover { background: rgba(255, 255, 255, .06); color: #fff; }
+.mega-cta { background: linear-gradient(160deg, rgba(99, 102, 241, .22), rgba(99, 102, 241, .05)); border: 1px solid rgba(99, 102, 241, .35); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; }
+.mega-cta-title { font-weight: 700; color: #fff; font-size: .98rem; margin-bottom: 6px; }
+.mega-cta-text { color: #c7c9e6; font-size: .84rem; line-height: 1.5; margin-bottom: 16px; }
+.mega-cta .btn { align-self: flex-start; }
+.mega-cta .btn .ic { width: 15px; height: 15px; }
+
 /* ---------- Hero ---------- */
 .hero { background: radial-gradient(900px 520px at 78% 18%, rgba(99, 102, 241, .3), transparent 62%), radial-gradient(600px 420px at -5% 105%, rgba(99, 102, 241, .16), transparent 60%), var(--navy); color: #fff; padding: 72px 0 96px; overflow: hidden; }
 .hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; }
@@ -348,12 +369,18 @@ a.live:hover { text-decoration: underline; }
 }
 @media (max-width: 1320px) {
   .menu-btn { display: inline-grid; }
-  .nav-links { display: none; position: absolute; left: 0; right: 0; top: 76px; flex-direction: column; gap: 0; margin: 0; padding: 10px 20px 20px; background: var(--navy); border-bottom: 1px solid rgba(255, 255, 255, .08); }
+  .nav-links { display: none; position: absolute; left: 0; right: 0; top: 76px; flex-direction: column; gap: 0; margin: 0; padding: 10px 20px 20px; background: var(--navy); border-bottom: 1px solid rgba(255, 255, 255, .08); max-height: calc(100vh - 76px); overflow-y: auto; }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 14px 4px; font-size: 1rem; border-bottom: 1px solid rgba(255, 255, 255, .06); }
   .nav-links a[aria-current="page"]::after { display: none; }
   .nav { justify-content: space-between; }
   .nav-actions { margin-left: auto; }
+  /* Mega menu becomes an inline accordion on mobile instead of a floating panel */
+  .nav-mega-trigger { width: 100%; padding: 14px 4px; font-size: 1rem; border-bottom: 1px solid rgba(255, 255, 255, .06); justify-content: space-between; color: #b7bad6; }
+  .nav-mega-trigger.is-current { color: #fff; }
+  .mega-panel { position: static; transform: none; width: auto; max-width: none; opacity: 1; visibility: visible; pointer-events: auto; display: none; grid-template-columns: 1fr; box-shadow: none; border: 0; border-radius: 0; background: rgba(255, 255, 255, .03); margin-bottom: 6px; padding: 14px 4px 18px; }
+  .nav-mega-item.open .mega-panel { display: grid; transform: none; }
+  .mega-cta { margin-top: 6px; }
 }
 @media (max-width: 900px) {
   .plans-grid { grid-template-columns: 1fr; max-width: 520px; }
