@@ -22,6 +22,7 @@
     gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
     pin: '<path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    chevron: '<path d="M6 9l6 6 6-6"/>',
     external: '<path d="M7 17L17 7M8 7h9v9"/>',
     star: '<path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/>',
     send: '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>',
@@ -29,7 +30,9 @@
     close: '<path d="M6 6l12 12M18 6L6 18"/>',
     chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z"/>',
     mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
-    check: '<path d="M5 12l5 5 9-10"/>'
+    check: '<path d="M5 12l5 5 9-10"/>',
+    sparkle: '<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z"/>',
+    shield: '<path d="M12 3l8 3v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/>'
   };
   const icon = (name, extra) => '<svg class="ic ' + (extra || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (PATHS[name] || '') + '</svg>';
 
@@ -37,31 +40,116 @@
   const logo = (pColor) => '<svg class="logo" viewBox="0 0 104 68" aria-hidden="true"><path d="M12 60V8h20a15 15 0 0 1 0 30H12" fill="none" stroke="' + (pColor || '#fff') + '" stroke-width="11"/><path transform="translate(4 0)" d="M92 24C92 10 58 10 58 27c0 15 34 9 34 25 0 13-36 11-36 0" fill="none" stroke="#7375f6" stroke-width="10"/></svg>';
 
   /* ---------- Header & footer ---------- */
-  const NAV = [
-    ['home', 'index.html', 'Home'], ['services', 'services.html', 'Services'], ['plans', 'plans.html', 'Plans'], ['blog', 'blog.html', 'Blog'], ['portfolio', 'portfolio.html', 'Portfolio'],
-    ['reviews', 'reviews.html', 'Reviews'], ['about', 'about.html', 'About'], ['contact', 'contact.html', 'Contact'], ['chat', 'chat.html', 'Chat']
+  // Flat links shown directly in the nav bar (no dropdown).
+  const NAV_FLAT = [
+    ['home', 'index.html', 'Home']
   ];
+  // Dropdown ("mega menu") groups. Content is pulled live from data.js (services / projects),
+  // so editing your services or portfolio there also updates these menus automatically.
+  function megaMenus() {
+    const svcCol = S.services.map((s) => ({ icon: s.icon, label: s.title, href: 'services.html' }));
+    svcCol.push({ icon: 'star', label: 'Plans & Pricing', href: 'plans.html' });
+    const cats = Array.from(new Set(S.projects.map((p) => p.category)));
+    const catIcon = { 'Salon & Beauty': 'sparkle', 'Gym & Fitness': 'bolt', 'Restaurant & Café': 'pin', 'Dental Clinic': 'shield', 'Interior Design': 'monitor' };
+    const portCol = cats.map((c) => ({ icon: catIcon[c] || 'monitor', label: c, href: 'portfolio.html?cat=' + encodeURIComponent(c) }));
+    portCol.push({ icon: 'arrow', label: 'View all projects', href: 'portfolio.html' });
+    const companyCol = [
+      { icon: 'monitor', label: 'About us', href: 'about.html' },
+      { icon: 'bolt', label: 'Blog', href: 'blog.html' },
+      { icon: 'star', label: 'Reviews', href: 'reviews.html' },
+      { icon: 'pin', label: 'Contact', href: 'contact.html' }
+    ];
+    return [
+      { key: 'services', label: 'Services', current: page === 'services' || page === 'plans', columns: [{ heading: 'What we build', items: svcCol }],
+        cta: { title: 'Simple, clear pricing', text: 'Websites from &#8377;5,000, with monthly maintenance.', button: 'See plans', href: 'plans.html' } },
+      { key: 'portfolio', label: 'Portfolio', current: page === 'portfolio', columns: [{ heading: 'Browse by type', items: portCol }],
+        cta: { title: 'See our work', text: 'Real demo websites for salons, gyms, caf\u00e9s &amp; clinics.', button: 'View portfolio', href: 'portfolio.html' } },
+      { key: 'company', label: 'Company', current: page === 'about' || page === 'blog' || page === 'reviews' || page === 'contact', columns: [{ heading: 'Get to know us', items: companyCol }],
+        cta: { title: 'Got a business?', text: 'Chat with us on WhatsApp to get started today.', button: 'Chat on WhatsApp', href: '@whatsapp' } }
+    ];
+  }
+  const NAV_TAIL = [['chat', 'chat.html', 'Chat']];
+  const ALL_NAV_FOR_FOOTER = () => {
+    const mega = megaMenus();
+    const items = [...NAV_FLAT];
+    mega.forEach((m) => m.columns.forEach((c) => c.items.forEach((i) => items.push([m.key + '-' + i.label, i.href.split('?')[0], i.label]))));
+    items.push(...NAV_TAIL);
+    return items;
+  };
+
+  function megaLinkHref(href) { return href === '@whatsapp' ? waLink() : href; }
 
   function renderHeader() {
     const el = $('#site-header');
     if (!el) return;
-    const links = NAV.map((n) => '<a href="' + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : '') + '>' + n[2] + '</a>').join('');
+    const mega = megaMenus();
+    const flat = NAV_FLAT.map((n) => '<a href="' + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : '') + '>' + n[2] + '</a>').join('');
+    const tail = NAV_TAIL.map((n) => '<a href="' + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : '') + '>' + n[2] + '</a>').join('');
+    const megaHtml = mega.map((m) => (
+      '<div class="nav-mega-item">' +
+        '<button type="button" class="nav-mega-trigger' + (m.current ? ' is-current' : '') + '" aria-expanded="false" aria-controls="mega-' + m.key + '">' + m.label + icon('chevron', 'nav-chevron') + '</button>' +
+        '<div class="mega-panel" id="mega-' + m.key + '">' +
+          '<div class="mega-cols">' +
+            m.columns.map((c) => (
+              '<div class="mega-col"><p class="mega-col-heading">' + c.heading + '</p>' +
+              c.items.map((i) => '<a class="mega-link" href="' + megaLinkHref(i.href) + '">' + icon(i.icon) + '<span>' + i.label + '</span></a>').join('') +
+              '</div>'
+            )).join('') +
+          '</div>' +
+          '<div class="mega-cta">' +
+            '<p class="mega-cta-title">' + m.cta.title + '</p>' +
+            '<p class="mega-cta-text">' + m.cta.text + '</p>' +
+            '<a class="btn btn-primary btn-sm" href="' + megaLinkHref(m.cta.href) + '"' + (m.cta.href === '@whatsapp' ? ' target="_blank" rel="noopener"' : '') + '>' + m.cta.button + icon('arrow') + '</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    )).join('');
+
     el.innerHTML =
       '<div class="wrap nav">' +
         '<a class="brand" href="index.html" aria-label="' + esc(S.brand.name) + ' home">' + logo('#fff') + '<span>' + esc(S.brand.name) + '</span></a>' +
-        '<nav class="nav-links" id="nav-links" aria-label="Main">' + links + '</nav>' +
+        '<nav class="nav-links" id="nav-links" aria-label="Main">' + flat + megaHtml + tail + '</nav>' +
         '<div class="nav-actions">' +
           '<a class="btn btn-outline-light btn-sm nav-wa" href="' + waLink() + '" target="_blank" rel="noopener"><span class="wa-ic">' + icon('whatsapp') + '</span>Chat on WhatsApp</a>' +
           '<a class="icon-btn" href="' + esc(S.contact.instagramUrl) + '" target="_blank" rel="noopener" aria-label="Instagram">' + icon('instagram') + '</a>' +
           '<button class="icon-btn menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">' + icon('menu') + '</button>' +
         '</div>' +
       '</div>';
+
     const btn = $('.menu-btn', el), nav = $('#nav-links', el);
     btn.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', open);
       btn.innerHTML = icon(open ? 'close' : 'menu');
+      $$('.nav-mega-item.open', el).forEach((it) => closeMega(it));
     });
+
+    // Mega menu open/close: hover on desktop (mouse), tap-to-toggle on touch/mobile.
+    // Decided once so a click right after a hover-open doesn't immediately re-close it.
+    function closeMega(item) {
+      item.classList.remove('open');
+      $('.nav-mega-trigger', item).setAttribute('aria-expanded', 'false');
+    }
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let closeTimer = null;
+    $$('.nav-mega-item', el).forEach((item) => {
+      const trigger = $('.nav-mega-trigger', item);
+      const openThis = () => { clearTimeout(closeTimer); $$('.nav-mega-item.open', el).forEach((it) => { if (it !== item) closeMega(it); }); item.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); };
+      if (canHover) {
+        item.addEventListener('mouseenter', openThis);
+        item.addEventListener('mouseleave', () => { closeTimer = setTimeout(() => closeMega(item), 220); });
+        trigger.addEventListener('click', (e) => { e.preventDefault(); }); // hover already controls it; avoid double-toggle
+      } else {
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isOpen = item.classList.contains('open');
+          $$('.nav-mega-item.open', el).forEach((it) => closeMega(it));
+          if (!isOpen) { item.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+        });
+      }
+    });
+    document.addEventListener('click', (e) => { if (!el.contains(e.target)) $$('.nav-mega-item.open', el).forEach((it) => closeMega(it)); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $$('.nav-mega-item.open', el).forEach((it) => closeMega(it)); });
   }
 
   function renderFooter() {
@@ -71,7 +159,7 @@
     el.innerHTML =
       '<div class="wrap foot-grid">' +
         '<div class="foot-brand"><a class="brand" href="index.html">' + logo('#fff') + '<span>' + esc(S.brand.name) + '</span></a><p>' + esc(S.brand.tagline) + '</p></div>' +
-        '<div><h3>Quick links</h3><ul class="foot-links">' + NAV.map((n) => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
+        '<div><h3>Quick links</h3><ul class="foot-links">' + ALL_NAV_FOR_FOOTER().map((n) => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
         '<div><h3>Contact</h3><ul class="foot-contact">' +
           '<li>' + icon('whatsapp') + '<a href="' + waLink() + '" target="_blank" rel="noopener">' + esc(c.whatsappDisplay) + '</a></li>' +
           '<li>' + icon('instagram') + '<a href="' + esc(c.instagramUrl) + '" target="_blank" rel="noopener">' + esc(c.instagramHandle) + '</a></li>' +
@@ -136,15 +224,19 @@
         const list = cat === 'All' ? S.projects : S.projects.filter((p) => p.category === cat);
         el.innerHTML = list.length ? list.map(projectCard).join('') : '<p class="empty">No projects here yet.</p>';
       };
+      // Support deep-links from the nav menu, e.g. portfolio.html?cat=Gym%20%26%20Fitness
+      const params = new URLSearchParams(location.search);
+      const wanted = params.get('cat');
+      const initial = wanted && cats.includes(wanted) ? wanted : 'All';
       if (bar) {
-        bar.innerHTML = cats.map((c, i) => '<button type="button" class="chip' + (i === 0 ? ' active' : '') + '" data-cat="' + esc(c) + '" aria-pressed="' + (i === 0) + '">' + esc(c) + '</button>').join('');
+        bar.innerHTML = cats.map((c) => '<button type="button" class="chip' + (c === initial ? ' active' : '') + '" data-cat="' + esc(c) + '" aria-pressed="' + (c === initial) + '">' + esc(c) + '</button>').join('');
         bar.addEventListener('click', (e) => {
           const b = e.target.closest('.chip'); if (!b) return;
           $$('.chip', bar).forEach((x) => { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', x === b); });
           draw(b.getAttribute('data-cat'));
         });
       }
-      draw('All');
+      draw(initial);
     },
     'reviews-list': (el) => {
       const items = (S.reviews && S.reviews.items) || [];
