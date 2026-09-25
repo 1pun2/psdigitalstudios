@@ -79,8 +79,10 @@ ul, ol { padding: 0; list-style: none; }
 .mega-cta .btn .ic { width: 15px; height: 15px; }
 
 /* ---------- Hero ---------- */
-.hero { background: radial-gradient(900px 520px at 78% 18%, rgba(99, 102, 241, .3), transparent 62%), radial-gradient(600px 420px at -5% 105%, rgba(99, 102, 241, .16), transparent 60%), var(--navy); color: #fff; padding: 72px 0 96px; overflow: hidden; }
-.hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; }
+.hero { position: relative; background: radial-gradient(900px 520px at 78% 18%, rgba(99, 102, 241, .3), transparent 62%), radial-gradient(600px 420px at -5% 105%, rgba(99, 102, 241, .16), transparent 60%), var(--navy); color: #fff; padding: 72px 0 96px; overflow: hidden; }
+.hero-3d { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero-3d canvas { display: block; width: 100% !important; height: 100% !important; }
+.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; }
 .eyebrow { color: #7d80f7; font-weight: 700; font-size: .78rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 18px; }
 .eyebrow.dark { color: var(--indigo-d); margin-bottom: 10px; }
 .hero h1 { font-size: clamp(2.6rem, 6vw, 4.3rem); line-height: 1.04; font-weight: 800; letter-spacing: -.02em; margin-bottom: 26px; }
