@@ -164,12 +164,12 @@ window.SITE = {
     {
       name: "Urban Interiors",
       category: "Interior Design",
-      headline: "Designing Better Spaces",
-      button: "See Projects",
-      description: "Interior design studio website with a project gallery.",
-      url: "",
+      headline: "Interiors, considered.",
+      button: "Book a Consultation",
+      description: "Interior design studio website with an editorial services list, a project gallery, and consultation booking on WhatsApp.",
+      url: "https://1pun2.github.io/psdigitalstudios/demos/urban-interiors/",
       image: "",
-      theme: { bg: "#e8e1d4", fg: "#2d2a24", accent: "#8a7a5c", onAccent: "#ffffff" }
+      theme: { bg: "#2c231d", fg: "#f6f2ea", accent: "#a9822e", onAccent: "#2c231d" }
     }
 
     /* ,{ ADD YOUR NEXT PROJECT HERE (put a comma after the block above) } */
