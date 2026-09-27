@@ -169,7 +169,7 @@ window.SITE = {
       description: "Interior design studio website with an editorial services list, a project gallery, and consultation booking on WhatsApp.",
       url: "https://1pun2.github.io/psdigitalstudios/demos/urban-interiors/",
       image: "",
-      theme: { bg: "#2c231d", fg: "#1e1b17", accent: "#a9822e", onAccent: "#e8b984" }
+      theme: {   bg: "#e8e1d4", fg: "#2d2a24", accent: "#8a7a5c", onAccent: "#ffffff" }
     },
      {
       name: "Meridian cafe",
