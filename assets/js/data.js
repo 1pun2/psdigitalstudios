@@ -169,7 +169,7 @@ window.SITE = {
       description: "Interior design studio website with an editorial services list, a project gallery, and consultation booking on WhatsApp.",
       url: "https://1pun2.github.io/psdigitalstudios/demos/urban-interiors/",
       image: "",
-      theme: { bg: "#2c231d", fg: "#f6f2ea", accent: "#a9822e", onAccent: "#2c231d" }
+      theme: { bg: "#2c231d", fg: "#1e1b17", accent: "#a9822e", onAccent: "#e8b984" }
     },
      {
       name: "Meridian cafe",
@@ -179,7 +179,7 @@ window.SITE = {
       description: "Café website with a tabbed menu, veg and non-veg marks, and table reservations on WhatsApp.",
       url: "https://1pun2.github.io/psdigitalstudios/demos/Meridian cafe/",
       image: "",
-      theme: { bg: "#113a2c", fg: "#ffffff", accent: "#f6dd8b", onAccent: "#113a2c" }
+      theme: { bg: "#151310", fg: "#1e1b17f", accent: "#d9a066", onAccent: "#f3efe8" }
     }
 
     /* ,{ ADD YOUR NEXT PROJECT HERE (put a comma after the block above) } */
