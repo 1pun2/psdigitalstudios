@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meridian Coffee Co. — Coffee, considered.</title>
+<style>
+  :root{
+    --bg:#faf8f4; --surface:#ffffff; --text:#1c1a17; --text-2:#5b564d;
+    --accent:#8a5a3b; --accent-2:#c98a52; --border:#e7e1d6;
+    --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px; --space-5:64px; --space-6:96px;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#151310; --surface:#1e1b17; --text:#f3efe8; --text-2:#b5ac9e;
+      --accent:#d9a066; --accent-2:#e8b984; --border:#3a352d;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#151310; --surface:#1e1b17; --text:#f3efe8; --text-2:#b5ac9e;
+    --accent:#d9a066; --accent-2:#e8b984; --border:#3a352d;
+  }
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.5; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:Futura,"Century Gothic",Arial,sans-serif; letter-spacing:0.02em; font-weight:600; margin:0;}
+  a{color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 var(--space-3);}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+
+  /* Nav */
+  header{
+    position:sticky; top:0; z-index:20;
+    padding-top:calc(env(safe-area-inset-top,0px) + var(--space-2));
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent; transition:border-color .3s ease;
+  }
+  header.scrolled{border-bottom-color:var(--border);}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-bottom:var(--space-2); gap:var(--space-2);}
+  .logo{font-size:1.1rem; letter-spacing:0.12em; text-decoration:none;}
+  .logo b{color:var(--accent);}
+  .nav-links{display:flex; gap:var(--space-4); list-style:none; margin:0; padding:0; font-size:0.95rem;}
+  .nav-links a{text-decoration:none; padding:var(--space-1) 0; border-bottom:2px solid transparent;}
+  .nav-links a:hover, .nav-links a:focus-visible{border-color:var(--accent);}
+  .nav-cta{
+    background:var(--accent); color:#fff; text-decoration:none; padding:10px 20px;
+    border-radius:999px; font-size:0.9rem; white-space:nowrap; min-height:44px; display:inline-flex; align-items:center;
+  }
+  .nav-toggle{display:none;}
+  @media (max-width:760px){
+    .nav-links{display:none;}
+  }
+
+  /* Hero */
+  .hero{
+    min-height:88vh; display:flex; flex-direction:column; justify-content:center;
+    padding:var(--space-6) 0; position:relative; overflow:hidden;
+  }
+  .hero .backdrop{
+    position:absolute; inset:0; z-index:-1;
+    background:
+      radial-gradient(60% 50% at 80% 15%, color-mix(in srgb, var(--accent-2) 30%, transparent), transparent 70%),
+      radial-gradient(50% 40% at 10% 90%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%);
+  }
+  .eyebrow{color:var(--accent); font-family:Futura,"Century Gothic",sans-serif; letter-spacing:0.2em; font-size:0.8rem; text-transform:uppercase;}
+  .hero h1{font-size:clamp(2.6rem, 7vw, 5.2rem); line-height:0.98; margin-top:var(--space-2); max-width:14ch;}
+  .hero p{font-size:1.15rem; color:var(--text-2); max-width:44ch; margin-top:var(--space-3);}
+  .hero .actions{display:flex; gap:var(--space-3); margin-top:var(--space-4); flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:12px 24px;
+    border-radius:999px; text-decoration:none; font-size:0.95rem; border:1px solid var(--border);
+  }
+  .btn-primary{background:var(--accent); color:#fff; border-color:transparent;}
+  .btn-primary:hover{background:var(--accent-2);}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  section{padding:var(--space-6) 0;}
+  .section-head{max-width:56ch; margin-bottom:var(--space-5);}
+  .section-head .eyebrow{display:block; margin-bottom:var(--space-1);}
+  .section-head h2{font-size:clamp(1.8rem, 4vw, 2.6rem); line-height:1.1;}
+  .section-head p{color:var(--text-2); margin-top:var(--space-2); font-size:1.05rem;}
+
+  /* Story */
+  .story-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); align-items:center;}
+  .story-art{
+    aspect-ratio:4/5; border-radius:18px;
+    background:linear-gradient(155deg, var(--accent) 0%, var(--accent-2) 45%, var(--border) 100%);
+    position:relative; overflow:hidden;
+  }
+  .story-art::after{
+    content:""; position:absolute; inset:0;
+    background:repeating-linear-gradient(115deg, rgba(255,255,255,.08) 0 2px, transparent 2px 26px);
+  }
+  @media (max-width:760px){ .story-grid{grid-template-columns:1fr;} }
+
+  /* Menu */
+  .menu-list{display:grid; gap:0;}
+  .menu-item{
+    display:flex; justify-content:space-between; gap:var(--space-3); align-items:flex-start;
+    padding:var(--space-3) 0; border-bottom:1px solid var(--border);
+  }
+  .menu-item:first-child{border-top:1px solid var(--border);}
+  .menu-item .icon{flex:none; color:var(--accent);}
+  .menu-item .text{flex:1;}
+  .menu-item h3{font-size:1.15rem; font-weight:600;}
+  .menu-item .desc{color:var(--text-2); font-size:0.95rem; margin-top:4px;}
+  .menu-item .price{font-family:Futura,"Century Gothic",sans-serif; font-size:1.05rem; white-space:nowrap;}
+
+  /* Gallery */
+  .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-2);}
+  .gallery .tile{aspect-ratio:1; border-radius:12px; position:relative; overflow:hidden;}
+  .gallery .tile::after{content:""; position:absolute; inset:0; background:repeating-linear-gradient(60deg, rgba(255,255,255,.1) 0 3px, transparent 3px 30px);}
+  .g1{background:linear-gradient(160deg,#8a5a3b,#c98a52);}
+  .g2{background:linear-gradient(160deg,#3c342a,#8a5a3b);}
+  .g3{background:linear-gradient(160deg,#c98a52,#e9d3b8);}
+  .g4{background:linear-gradient(160deg,#5b564d,#8a5a3b);}
+  .g5{background:linear-gradient(160deg,#e9d3b8,#c98a52);}
+  .g6{background:linear-gradient(160deg,#1c1a17,#5b564d);}
+  @media (max-width:760px){ .gallery{grid-template-columns:repeat(2,1fr);} }
+
+  /* Visit */
+  .visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5);}
+  .visit-card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:var(--space-4);}
+  .visit-card h3{font-size:1.1rem; margin-bottom:var(--space-2);}
+  .visit-card dl{display:grid; grid-template-columns:auto 1fr; gap:var(--space-1) var(--space-3); margin:0; font-size:0.95rem;}
+  .visit-card dt{color:var(--text-2);}
+  .visit-card dd{margin:0;}
+  @media (max-width:760px){ .visit-grid{grid-template-columns:1fr;} }
+
+  /* CTA */
+  .cta{
+    text-align:center; background:var(--surface); border:1px solid var(--border);
+    border-radius:24px; padding:var(--space-6) var(--space-3); margin:0 var(--space-3);
+  }
+  .cta h2{font-size:clamp(1.8rem,5vw,2.8rem); max-width:20ch; margin:0 auto;}
+  .cta p{color:var(--text-2); margin-top:var(--space-2);}
+
+  footer{padding:var(--space-5) 0; border-top:1px solid var(--border); margin-top:var(--space-6);}
+  .foot-grid{display:flex; justify-content:space-between; align-items:center; gap:var(--space-3); flex-wrap:wrap; font-size:0.9rem; color:var(--text-2);}
+  .foot-credit{display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--text-2);}
+  .foot-credit b{color:var(--text);}
+  .foot-credit:hover{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="wrap" aria-label="Primary">
+    <a href="#top" class="logo">MERIDIAN <b>·</b> COFFEE CO.</a>
+    <ul class="nav-links">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <a href="#visit" class="nav-cta">Reserve a table</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow">Est. 2019 — Third Street</span>
+      <h1>Coffee, considered.</h1>
+      <p>A quiet corner for slow mornings — single-origin pour overs, house-baked pastry, and a room built for lingering.</p>
+      <div class="actions">
+        <a href="#visit" class="btn btn-primary">Reserve a table</a>
+        <a href="#menu" class="btn">See the menu</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="story-art reveal" aria-hidden="true"></div>
+        <div class="reveal">
+          <span class="eyebrow">Our story</span>
+          <h2 style="margin-top:8px; font-size:clamp(1.8rem,4vw,2.4rem);">Small batches, no shortcuts</h2>
+          <p style="color:var(--text-2); margin-top:var(--space-3); font-size:1.05rem;">
+            Meridian started as a single roaster and a folding table. Today it's still small on purpose — we
+            roast twice a week, pull every shot to order, and bake before sunrise. Nothing sits long enough to
+            go stale, including the conversation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">On the counter</span>
+        <h2>A short, honest menu</h2>
+        <p>Four drinks, three pastries, done well — that's the whole philosophy.</p>
+      </div>
+      <div class="menu-list">
+        <div class="menu-item reveal">
+          <span class="icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h13a3 3 0 0 1 0 6h-1"/><path d="M4 8v6a4 4 0 0 0 4 4h5a4 4 0 0 0 4-4V8"/><path d="M7 4c0 1-1 1-1 2M11 4c0 1-1 1-1 2"/></svg>
+          </span>
+          <span class="text"><h3>Pour Over — Single Origin</h3><p class="desc">Rotating micro-lot, brewed to order, tasting notes on the board.</p></span>
+          <span class="price">$5.50</span>
+        </div>
+        <div class="menu-item reveal">
+          <span class="icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+          </span>
+          <span class="text"><h3>Oat Cortado</h3><p class="desc">Double ristretto, steamed oat milk, served short.</p></span>
+          <span class="price">$4.75</span>
+        </div>
+        <div class="menu-item reveal">
+          <span class="icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12c3-6 15-6 18 0"/><path d="M4 12h16l-1.5 7h-13z"/></svg>
+          </span>
+          <span class="text"><h3>Almond Croissant</h3><p class="desc">Laminated in-house, baked fresh each morning.</p></span>
+          <span class="price">$4.25</span>
+        </div>
+        <div class="menu-item reveal">
+          <span class="icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 4v16"/></svg>
+          </span>
+          <span class="text"><h3>Tasting Flight</h3><p class="desc">Three origins, side by side, with notes to compare.</p></span>
+          <span class="price">$9.00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Inside Meridian</span>
+        <h2>The room</h2>
+      </div>
+      <div class="gallery">
+        <div class="tile g1 reveal"></div>
+        <div class="tile g2 reveal"></div>
+        <div class="tile g3 reveal"></div>
+        <div class="tile g4 reveal"></div>
+        <div class="tile g5 reveal"></div>
+        <div class="tile g6 reveal"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Find us</span>
+        <h2>Visit Meridian</h2>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-card reveal">
+          <h3>Hours</h3>
+          <dl>
+            <dt>Mon–Fri</dt><dd>7:00 – 18:00</dd>
+            <dt>Sat–Sun</dt><dd>8:00 – 17:00</dd>
+          </dl>
+        </div>
+        <div class="visit-card reveal">
+          <h3>Location</h3>
+          <dl>
+            <dt>Address</dt><dd>142 Third Street<br>Riverside District</dd>
+            <dt>Phone</dt><dd><a href="tel:+10000000000">(000) 000-0000</a></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta reveal">
+      <h2>Come say hello.</h2>
+      <p>Walk-ins always welcome — reservations held for tables of 4 or more.</p>
+      <div class="actions" style="justify-content:center; margin-top:var(--space-4);">
+        <a href="tel:+10000000000" class="btn btn-primary">Call to reserve</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span>© 2026 Meridian Coffee Co. · Demo site — not a real business.</span>
+    <a class="foot-credit" href="https://1pun2.github.io/psdigitalstudios/" target="_blank" rel="noopener">
+      Designed by <b>PS Digital Studios</b>
+    </a>
+  </div>
+</footer>
+
+<script>
+  var header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.15});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>
