@@ -170,6 +170,16 @@ window.SITE = {
       url: "https://1pun2.github.io/psdigitalstudios/demos/urban-interiors/",
       image: "",
       theme: { bg: "#2c231d", fg: "#f6f2ea", accent: "#a9822e", onAccent: "#2c231d" }
+    },
+     {
+      name: "Meridian cafe",
+      category: "Restaurant & Café",
+      headline: "Coffee, considered.",
+      button: "View menu",
+      description: "Café website with a tabbed menu, veg and non-veg marks, and table reservations on WhatsApp.",
+      url: "https://1pun2.github.io/psdigitalstudios/demos/Meridian cafe/",
+      image: "",
+      theme: { bg: "#113a2c", fg: "#ffffff", accent: "#f6dd8b", onAccent: "#113a2c" }
     }
 
     /* ,{ ADD YOUR NEXT PROJECT HERE (put a comma after the block above) } */
