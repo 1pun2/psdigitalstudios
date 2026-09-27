@@ -179,7 +179,7 @@ window.SITE = {
       description: "Café website with a tabbed menu, veg and non-veg marks, and table reservations on WhatsApp.",
       url: "https://1pun2.github.io/psdigitalstudios/demos/Meridian cafe/",
       image: "",
-      theme: { bg: "#151310", fg: "#1e1b17f", accent: "#d9a066", onAccent: "#f3efe8" }
+      theme: { bg: "#c47220", fg: "#2d2a24", accent: "#d9a066", onAccent: "#f3efe8" }
     }
 
     /* ,{ ADD YOUR NEXT PROJECT HERE (put a comma after the block above) } */
