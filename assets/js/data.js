@@ -180,7 +180,17 @@ window.SITE = {
       url: "https://1pun2.github.io/psdigitalstudios/demos/Meridian cafe/",
       image: "",
       theme: { bg: "#c47220", fg: "#2d2a24", accent: "#d9a066", onAccent: "#f3efe8" }
-    }
+    },
+     {
+  name: "Noir & Bean",
+  category: "Restaurant & Café",
+  headline: "Coffee. Crafted Slowly.",
+  button: "Explore the Menu",
+  description: "A premium coffee house website with a cinematic video hero, scroll-driven animation, and an editorial dark/cream design.",
+  url: "https://1pun2.github.io/psdigitalstudios/demos/noir-and-bean/",
+  image: "",
+  theme: { bg: "#120d09", fg: "#f3ead9", accent: "#c9a06c", onAccent: "#120d09" }
+}
 
     /* ,{ ADD YOUR NEXT PROJECT HERE (put a comma after the block above) } */
   ],
