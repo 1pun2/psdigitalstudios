@@ -197,7 +197,7 @@ window.SITE = {
   headline: "Designed around light.",
   button: "Book a Consultation",
   description: "A cooler, minimalist interior design studio site with a real Three.js 3D hero scene and scroll-driven sections.",
-  url: "http://www.psdigitalstudios.in/demos/studio-lumen/",
+  url: "https://1pun2.github.io/psdigitalstudios/demos/studio-lumen/",
   image: "",
   theme: { bg: "#201f1d", fg: "#f6f3ee", accent: "#8a9a7e", onAccent: "#201f1d" }
 }
