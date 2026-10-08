@@ -91,6 +91,7 @@ window.SITE = {
         maintenance: "₹1,500",
         maintenanceNote: "per month",
         features: [
+          "3D Animated Hero for better design look",
           "More professional design and layout",
           "More pages and sections for your business",
           "Works well on phones and computers",
