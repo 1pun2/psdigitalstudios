@@ -190,6 +190,16 @@ window.SITE = {
   url: "https://1pun2.github.io/psdigitalstudios/demos/noir-and-bean/",
   image: "",
   theme: { bg: "#120d09", fg: "#f3ead9", accent: "#c9a06c", onAccent: "#120d09" }
+},
+     {
+  name: "Studio Lumen",
+  category: "Interior Design",
+  headline: "Designed around light.",
+  button: "Book a Consultation",
+  description: "A cooler, minimalist interior design studio site with a real Three.js 3D hero scene and scroll-driven sections.",
+  url: "http://www.psdigitalstudios.in/demos/studio-lumen/",
+  image: "",
+  theme: { bg: "#201f1d", fg: "#f6f3ee", accent: "#8a9a7e", onAccent: "#201f1d" }
 }
 
     /* ,{ ADD YOUR NEXT PROJECT HERE (put a comma after the block above) } */
